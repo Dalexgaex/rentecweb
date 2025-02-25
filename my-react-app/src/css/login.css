@@ -30,11 +30,11 @@ body {
 }
 
 .rentec-image {
-  width: 80%; /* Reducida al 80% del ancho disponible */
-  max-width: 350px; /* Máximo tamaño para evitar que crezca demasiado */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  max-width: 700px; /* Aumentado el tamaño máximo */
   height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
 }
 
 .social-section {
