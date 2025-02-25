@@ -1,65 +1,85 @@
 import { useState } from "react";
-import { registerUser } from "../services/authService";
+import { loginUser } from "../services/authService";
 import { useNavigate } from "react-router-dom";
-import "../css/login.css";
+import "../css/login.css"; // Importa los estilos
+import { FaFacebook, FaInstagram, FaTwitter, FaGooglePlay, FaApple } from "react-icons/fa"; // Importa los íconos
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleRegister = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
     try {
-      await registerUser({ name, email, password, phoneNumber });
-      alert("Registro exitoso. Ahora inicia sesión.");
-      navigate("/login");
+      await loginUser({ email, password });
+      alert("Inicio de sesión exitoso");
+      navigate("/home");
     } catch (error) {
-      alert("Error en el registro: " + error.message);
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="login-container">
-      {/* Sección de la imagen */}
-      <div className="login-image">
-        <img src="/src/assets/login.jpeg" alt="Login" />
+      <div className="left-side">
+        <img src="../assets/rentec-image.jpg" alt="Rentec" className="rentec-image" />
+        <div className="social-section">
+          <div className="social-icons">
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+              <FaFacebook />
+            </a>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+              <FaInstagram />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+              <FaTwitter />
+            </a>
+            <a href="https://play.google.com" target="_blank" rel="noopener noreferrer">
+              <FaGooglePlay />
+            </a>
+          </div>
+          <div className="download-buttons">
+            <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer">
+              <button className="ios-button">Descargar en iOS</button>
+            </a>
+            <a href="https://play.google.com" target="_blank" rel="noopener noreferrer">
+              <button className="android-button">Descargar en Android</button>
+            </a>
+          </div>
+        </div>
       </div>
 
-      {/* Sección del formulario */}
-      <div className="login-box">
-        <h2>Login</h2>
-        <form onSubmit={handleRegister}>
-          <input
-            type="text"
-            placeholder="Nombre"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-          <input
-            type="email"
-            placeholder="Correo"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Contraseña"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <input
-            type="tel"
-            placeholder="Teléfono"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            required
-          />
-          <button type="submit">Registrarse</button>
-        </form>
+      <div className="right-side">
+        <div className="login-box">
+          <h2>Iniciar Sesión</h2>
+          <form onSubmit={handleLogin}>
+            <input
+              type="email"
+              placeholder="Correo"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            {error && <div className="error-message">{error}</div>}
+            <button type="submit" disabled={loading}>
+              {loading ? "Cargando..." : "Iniciar Sesión"}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
