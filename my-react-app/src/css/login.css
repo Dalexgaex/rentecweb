@@ -1,69 +1,78 @@
 /* Centrado y fondo */
-/* Estilos para la página de login */
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #2d2d2d;
-  background-image: linear-gradient(135deg, #1a1a1a 0%, #3b3b3b 100%);
+  background: url("../assets/machinery-bg.jpg") no-repeat center center/cover;
+  background-attachment: fixed;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
+/* Estilo de la caja de login */
 .login-box {
-  background-color: #333333;
-  border-radius: 10px;
-  padding: 40px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  width: 400px;
+  background: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Fondo blanco con un toque de transparencia */
+  padding: 2rem;
+  border-radius: 15px;
   text-align: center;
-  color: #ffffff;
-  border: 2px solid #ff6f00; /* Un toque de naranja metálico */
+  color: #333; /* Texto oscuro para buen contraste */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 400px;
+  transition: all 0.3s ease;
 }
 
-.login-box h2 {
-  font-family: "Roboto", sans-serif;
-  font-size: 30px;
-  margin-bottom: 20px;
-  color: #ff6f00; /* Naranja metálico */
+.login-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
-input {
+/* Estilo de inputs y botones */
+.login-box input,
+.login-box button {
   width: 100%;
   padding: 12px;
   margin: 10px 0;
-  border: 1px solid #555555;
-  border-radius: 5px;
-  background-color: #444444;
-  color: #ffffff;
+  border-radius: 8px;
+  border: 2px solid #f1c40f; /* Bordes amarillos */
   font-size: 16px;
-}
-
-input::placeholder {
-  color: #bbbbbb;
-}
-
-input:focus {
-  border: 1px solid #ff6f00;
   outline: none;
-  background-color: #555555;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #ff6f00; /* Naranja metálico */
-  border: none;
-  border-radius: 5px;
-  color: #ffffff;
-  font-size: 16px;
+/* Efecto de enfoque en los inputs */
+.login-box input:focus {
+  background-color: #f7f7f7; /* Fondo blanco claro */
+  box-shadow: 0 0 5px rgba(241, 196, 15, 0.8); /* Resaltado amarillo */
+}
+
+/* Estilo del botón */
+.login-box button {
+  background-color: #f1c40f; /* Fondo amarillo */
+  color: white;
+  border: none; /* Elimina el borde predeterminado */
+}
+
+.login-box button:hover {
+  background-color: #e0b400; /* Amarillo más oscuro */
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 0 5px rgba(241, 196, 15, 0.8); /* Resaltado amarillo en hover */
 }
 
-button:hover {
-  background-color: #bb4b00; /* Un tono más oscuro de naranja */
-}
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 600px) {
+  .login-container {
+    padding: 0 10px;
+  }
 
-button:active {
-  background-color: #cc5200; /* Más oscuro cuando se hace clic */
+  .login-box {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
 }
