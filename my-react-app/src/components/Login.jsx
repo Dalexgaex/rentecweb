@@ -2,7 +2,13 @@ import { useState } from "react";
 import { loginUser } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import "../css/login.css"; // Importa los estilos
-import { FaFacebook, FaInstagram, FaTwitter, FaGooglePlay, FaApple } from "react-icons/fa"; // Importa los íconos
+import {
+  FaFacebook,
+  FaInstagram,
+  FaTwitter,
+  FaGooglePlay,
+  FaApple,
+} from "react-icons/fa"; // Importa los íconos
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -29,27 +35,55 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="left-side">
-        <img src="../assets/rentec-image.jpg" alt="Rentec" className="rentec-image" />
+        <img
+          src="../src/assets/login.jpeg"
+          alt="Rentec"
+          className="rentec-image"
+        />
         <div className="social-section">
           <div className="social-icons">
-            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaFacebook />
             </a>
-            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaInstagram />
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaTwitter />
             </a>
-            <a href="https://play.google.com" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://play.google.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaGooglePlay />
             </a>
           </div>
           <div className="download-buttons">
-            <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://apps.apple.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <button className="ios-button">Descargar en iOS</button>
             </a>
-            <a href="https://play.google.com" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://play.google.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <button className="android-button">Descargar en Android</button>
             </a>
           </div>
