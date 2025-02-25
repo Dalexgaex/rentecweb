@@ -1,9 +1,14 @@
+<<<<<<< Updated upstream
 /* Centrado y fondo */
+=======
+/* Estilos para la página de login */
+>>>>>>> Stashed changes
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+<<<<<<< Updated upstream
   background: url("../assets/machinery-bg.jpg") no-repeat center center/cover;
   background-attachment: fixed;
   padding: 0 20px;
@@ -75,4 +80,67 @@
     padding: 1.5rem;
     max-width: 90%;
   }
+=======
+  background-color: #2d2d2d;
+  background-image: linear-gradient(135deg, #1a1a1a 0%, #3b3b3b 100%);
+}
+
+.login-box {
+  background-color: #333333;
+  border-radius: 10px;
+  padding: 40px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  width: 400px;
+  text-align: center;
+  color: #ffffff;
+  border: 2px solid #ff6f00; /* Un toque de naranja metálico */
+}
+
+.login-box h2 {
+  font-family: "Roboto", sans-serif;
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: #ff6f00; /* Naranja metálico */
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #555555;
+  border-radius: 5px;
+  background-color: #444444;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+input::placeholder {
+  color: #bbbbbb;
+}
+
+input:focus {
+  border: 1px solid #ff6f00;
+  outline: none;
+  background-color: #555555;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #ff6f00; /* Naranja metálico */
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #e65c00; /* Un tono más oscuro de naranja */
+}
+
+button:active {
+  background-color: #cc5200; /* Más oscuro cuando se hace clic */
+>>>>>>> Stashed changes
 }
