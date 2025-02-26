@@ -14,15 +14,11 @@
   background-color: #ff8c00; /* Naranja vibrante */
   color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  position: sticky;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
 }
 
 .navbar .logo {
   width: 80px;
-  height: auto;
+  height: 80px;
 }
 
 .navbar .search-bar {
@@ -32,19 +28,12 @@
   border: none;
   outline: none;
   font-size: 14px;
-  transition: all 0.3s ease-in-out;
-}
-
-.navbar .search-bar:focus {
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
 
 .navbar .nav-links {
   display: flex;
   list-style: none;
   gap: 25px;
-  padding: 0;
-  margin: 0;
 }
 
 .navbar .nav-links li {

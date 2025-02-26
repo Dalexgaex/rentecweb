@@ -7,6 +7,8 @@ const Home = () => {
   const [machines, setMachines] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0); // Para rastrear la posición anterior del scroll
+  const [hidden, setHidden] = useState(false); // Para saber si el navbar debe estar oculto
 
   useEffect(() => {
     fetch("https://rentek.onrender.com/machinery") // Cambia esto con la URL correcta para obtener las máquinas
@@ -23,7 +25,8 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <nav className="navbar">
+      {/* Navbar */}
+      <nav className={`navbar ${hidden ? "hidden" : ""}`}>
         <img src="../src/assets/logo.png" alt="Logo" className="logo" />
         <input
           type="text"
@@ -41,6 +44,7 @@ const Home = () => {
         </ul>
       </nav>
 
+      {/* Contenedor de máquinas */}
       <div className="machines-container">
         {loading ? (
           <p>Cargando máquinas...</p>
