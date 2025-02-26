@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { loginUser } from "../services/authService";
 import { useNavigate } from "react-router-dom";
-import "../css/login.css"; // Importa los estilos
+import "../css/login.css";
 import {
   FaFacebook,
   FaInstagram,
   FaTwitter,
   FaGooglePlay,
   FaApple,
-} from "react-icons/fa"; // Importa los íconos
+} from "react-icons/fa";
+
+const images = [
+  "../src/assets/login.png",
+  "../src/assets/logo.png",
+  "../src/assets/slider1.jpeg",
+];
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,6 +22,21 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [index, setIndex] = useState(0);
+
+  const prevImage = () => {
+    setIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
+  const nextImage = () => {
+    setIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  };
+
+  // Cambio automático de imagen cada 7 segundos
+  useEffect(() => {
+    const interval = setInterval(nextImage, 5000);
+    return () => clearInterval(interval); // Limpia el intervalo al desmontar
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -34,17 +55,26 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      {/* Navbar con logo */}
-      <nav className="navbar">
-        <img src="../src/assets/logo.png" alt="Logo" className="logo" />
-      </nav>
-
       <div className="left-side">
-        <img
-          src="../src/assets/login.png"
-          alt="Rentec"
-          className="rentec-image"
-        />
+        <div className="carousel-container">
+          <button className="carousel-button left" onClick={prevImage}>
+            ❮
+          </button>
+          <div className="carousel-images">
+            {images.map((img, i) => (
+              <img
+                key={i}
+                src={img}
+                alt={`Slide ${i}`}
+                style={{ opacity: i === index ? 1 : 0 }}
+              />
+            ))}
+          </div>
+          <button className="carousel-button right" onClick={nextImage}>
+            ❯
+          </button>
+        </div>
+
         <div className="social-section">
           <div className="social-icons">
             <a
@@ -118,24 +148,24 @@ const Login = () => {
               {loading ? "Cargando..." : "Iniciar Sesión"}
             </button>
           </form>
-
-          {/* Botón para registrarse */}
           <p className="register-text">
             ¿No tienes cuenta?{" "}
-            <button className="register-button" onClick={() => navigate("/register")}>
+            <button
+              className="register-button"
+              onClick={() => navigate("/register")}
+            >
               Crea una
             </button>
           </p>
           <p className="provider-text">
-  ¿Eres proveedor?{" "}
-  <button
-    className="provider-button"
-    onClick={() => navigate("/provider-login")}
-  >
-    Soy proveedor
-  </button>
-</p>
-
+            ¿Eres proveedor?{" "}
+            <button
+              className="provider-button"
+              onClick={() => navigate("/provider-login")}
+            >
+              Soy proveedor
+            </button>
+          </p>
         </div>
       </div>
     </div>
