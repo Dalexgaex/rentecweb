@@ -34,9 +34,14 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      {/* Navbar con logo */}
+      <nav className="navbar">
+        <img src="../src/assets/logo.png" alt="Logo" className="logo" />
+      </nav>
+
       <div className="left-side">
         <img
-          src="../src/assets/login.jpeg"
+          src="../src/assets/login.png"
           alt="Rentec"
           className="rentec-image"
         />

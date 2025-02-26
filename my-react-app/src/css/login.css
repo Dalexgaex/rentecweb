@@ -17,6 +17,10 @@ body {
   flex-wrap: wrap; /* Asegura que en pantallas pequeñas todo se acomode */
 }
 
+.logo {
+  height: 40px;
+}
+
 /* Lado izquierdo (imagen y sección de redes sociales) */
 .left-side {
   flex: 1;
