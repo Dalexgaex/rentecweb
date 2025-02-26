@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import AppRoutes from "./routes";
+import AppRoutes from "./router";
 import "./css/login.css";  // Ruta correcta
 import "./css/register.css"; // Ruta correcta
 

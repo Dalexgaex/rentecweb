@@ -118,6 +118,14 @@ const Login = () => {
               {loading ? "Cargando..." : "Iniciar Sesión"}
             </button>
           </form>
+
+          {/* Botón para registrarse */}
+          <p className="register-text">
+            ¿No tienes cuenta?{" "}
+            <button className="register-button" onClick={() => navigate("/register")}>
+              Crea una
+            </button>
+          </p>
         </div>
       </div>
     </div>

@@ -1,61 +1,63 @@
 import { useState } from "react";
-import { registerUser } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import "../css/register.css";
 
+const images = [
+  "/src/assets/carousel1.jpg",
+  "/src/assets/carousel2.jpg",
+  "/src/assets/carousel3.jpg",
+];
+
 const Register = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [index, setIndex] = useState(0);
   const navigate = useNavigate();
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    try {
-      await registerUser({ name, email, password, phoneNumber });
-      alert("Registro exitoso. Ahora inicia sesión.");
-      navigate("/login");
-    } catch (error) {
-      alert("Error en el registro: " + error.message);
-    }
+  const nextImage = () => {
+    setIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
 
   return (
     <div className="register-container">
-      <div className="register-box">
-        <h2>Registro</h2>
-        <form onSubmit={handleRegister}>
-          <input
-            type="text"
-            placeholder="Nombre"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-          <input
-            type="email"
-            placeholder="Correo"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Contraseña"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <input
-            type="tel"
-            placeholder="Teléfono"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            required
-          />
-          <button type="submit">Registrarse</button>
-        </form>
+      {/* Carrusel de imágenes */}
+      <div className="left-side">
+        <div className="carousel-container">
+          <button className="carousel-button left" onClick={prevImage}>
+            ❮
+          </button>
+          <div className="carousel-images">
+            {images.map((img, i) => (
+              <img
+                key={i}
+                src={img}
+                alt={`Slide ${i}`}
+                style={{ opacity: i === index ? 1 : 0 }}
+              />
+            ))}
+          </div>
+          <button className="carousel-button right" onClick={nextImage}>
+            ❯
+          </button>
+        </div>
+      </div>
+
+      {/* Formulario de registro */}
+      <div className="right-side">
+        <div className="register-box">
+          <h2>Crear Cuenta</h2>
+          <form>
+            <input type="text" placeholder="Nombre" required />
+            <input type="email" placeholder="Correo" required />
+            <input type="password" placeholder="Contraseña" required />
+            <button type="submit">Registrarse</button>
+          </form>
+          <p className="login-text">
+            ¿Ya tienes cuenta? <a onClick={() => navigate("/login")}>Inicia sesión</a>
+          </p>
+        </div>
       </div>
     </div>
   );

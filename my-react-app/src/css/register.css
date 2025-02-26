@@ -1,25 +1,203 @@
-.register-container {
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  .register-container {
+    display: flex;
+    height: 100vh;
+    background-color: #f9f9f9;
+    flex-wrap: wrap;
+  }
+  
+  .logo {
+    height: 40px;
+  }
+  
+  /* Lado izquierdo (carrusel de imágenes) */
+  .left-side {
+    flex: 1;
+    background-color: #f39c12; /* Naranja vibrante */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* Estilos del carrusel */
+  .carousel-container {
+    width: 90%;
+    max-width: 500px;
+    height: 300px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .carousel-images {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .carousel-images img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    transition: opacity 1s ease-in-out;
+  }
+  
+  /* Flechas de navegación */
+  .carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 50%;
+  }
+  
+  .carousel-button.left {
+    left: 10px;
+  }
+  
+  .carousel-button.right {
+    right: 10px;
+  }
+  
+  .carousel-button:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  
+  /* Lado derecho (formulario de registro) */
+  .right-side {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: url("../assets/machinery-bg.jpg") no-repeat center center/cover;
+    padding: 40px;
   }
   
   .register-box {
-    background: rgba(0, 0, 0, 0.8);
-    padding: 2rem;
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3rem;
+    border-radius: 15px;
     text-align: center;
-    color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #333;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 450px;
+    transition: all 0.3s ease;
+  }
+  
+  .register-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+  
+  .register-box h2 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    color: #e67e22; /* Naranja */
   }
   
   .register-box input,
   .register-box button {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
+    padding: 14px;
+    margin: 12px 0;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  
+  .register-box input {
+    border: 2px solid #e67e22;
+    background-color: #fff;
+    outline: none;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .register-box input:focus {
+    box-shadow: 0 0 5px rgba(230, 126, 34, 0.8);
+  }
+  
+  .register-box button {
+    background-color: #e67e22;
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .register-box button:hover {
+    background-color: #d35400;
+    box-shadow: 0 0 10px rgba(230, 126, 34, 0.8);
+  }
+  
+  /* Enlace para iniciar sesión */
+  .login-text {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .login-text a {
+    color: #e67e22;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .login-text a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsividad */
+  @media (max-width: 768px) {
+    .register-container {
+      flex-direction: column-reverse;
+    }
+  
+    .left-side,
+    .right-side {
+      flex: none;
+      width: 100%;
+      padding: 20px;
+    }
+  
+    .carousel-container {
+      height: 250px;
+    }
+  
+    .register-box {
+      padding: 2rem;
+    }
+  
+    button {
+      font-size: 14px;
+      padding: 12px 20px;
+    }
   }
   

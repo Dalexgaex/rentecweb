@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Home from "./pages/Home.jsx";
+import Home from "./page/Home.jsx";
 
 
 function App() {
@@ -16,4 +16,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 
