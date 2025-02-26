@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/register.css";
 
 const images = [
-  "/src/assets/carousel1.jpg",
-  "/src/assets/carousel2.jpg",
-  "/src/assets/carousel3.jpg",
+  "/src/assets/login.png",
+  "/src/assets/logo.png",
+  "/src/assets/slider1.jpeg",
 ];
 
 const Register = () => {
@@ -19,6 +19,12 @@ const Register = () => {
   const prevImage = () => {
     setIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
+
+  // Efecto para cambiar automáticamente la imagen cada 7 segundos
+  useEffect(() => {
+    const interval = setInterval(nextImage, 5000);
+    return () => clearInterval(interval); // Limpiar el intervalo al desmontar
+  }, []);
 
   return (
     <div className="register-container">
@@ -55,7 +61,8 @@ const Register = () => {
             <button type="submit">Registrarse</button>
           </form>
           <p className="login-text">
-            ¿Ya tienes cuenta? <a onClick={() => navigate("/login")}>Inicia sesión</a>
+            ¿Ya tienes cuenta?{" "}
+            <a onClick={() => navigate("/login")}>Inicia sesión</a>
           </p>
         </div>
       </div>
