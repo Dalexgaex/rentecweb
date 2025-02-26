@@ -1,56 +1,57 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { loginProvider } from "../services/authService"; // Asumiendo que tienes un servicio para autenticar proveedores
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import "../css/register.css";
+import "../css/login.css";
 
 const ProviderLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
+    setError("");
     try {
-      // Reemplaza con la URL correcta para iniciar sesión del proveedor
-      const response = await axios.post("https://rentek.onrender.com/Providers", {
-        email,
-        password,
-      });
-
-      // Si el inicio de sesión es exitoso, guarda el token o la sesión
-      // (por ejemplo, puedes almacenar el token en localStorage o context)
-      localStorage.setItem("providerToken", response.data.token);
-
-      // Redirigir al proveedor a la página donde verá sus máquinas
-      navigate("/proveedor/maquinas");
+      await loginProvider({ email, password });
+      alert("Inicio de sesión exitoso");
+      navigate("/provider-dashboard"); // Redirigir al proveedor a su panel
     } catch (error) {
-      setError("Credenciales incorrectas o error en el servidor");
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="login-container">
-      <h2>Iniciar sesión como proveedor</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Correo electrónico"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        {error && <p className="error">{error}</p>}
-        <button type="submit">Iniciar sesión</button>
-      </form>
+      <div className="right-side">
+        <div className="login-box">
+          <h2>Iniciar Sesión como Proveedor</h2>
+          <form onSubmit={handleLogin}>
+            <input
+              type="email"
+              placeholder="Correo"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            {error && <div className="error-message">{error}</div>}
+            <button type="submit" disabled={loading}>
+              {loading ? "Cargando..." : "Iniciar Sesión"}
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

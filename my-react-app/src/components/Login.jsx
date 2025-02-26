@@ -126,6 +126,16 @@ const Login = () => {
               Crea una
             </button>
           </p>
+          <p className="provider-text">
+  ¿Eres proveedor?{" "}
+  <button
+    className="provider-button"
+    onClick={() => navigate("/provider-login")}
+  >
+    Soy proveedor
+  </button>
+</p>
+
         </div>
       </div>
     </div>
