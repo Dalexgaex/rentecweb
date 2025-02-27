@@ -103,26 +103,33 @@ const ProviderDashboard = () => {
         {machines.length === 0 ? (
           <p>No hay máquinas disponibles.</p>
         ) : (
-          <Grid container spacing={3}>
+          <Grid container spacing={3} direction="column">
             {machines.map((machine) => (
-              <Grid item xs={12} sm={6} md={4} key={machine.id}>
+              <Grid item xs={12} key={machine.id}>
                 <Box className="machine-card">
-                  <h3>{machine.name}</h3>
-                  <p>
-                    <strong>Marca:</strong> {machine.brand}
-                  </p>
-                  <p>
-                    <strong>Ubicación:</strong> {machine.location}
-                  </p>
-                  <p>
-                    <strong>Precio de renta:</strong> ${machine.rental_price}
-                  </p>
-                  <p>{machine.description}</p>
+                  {/* Imagen primero */}
                   <img
                     src={machine.image_code}
                     alt={machine.name}
                     className="machine-image"
                   />
+
+                  {/* Información en el centro */}
+                  <div className="machine-info">
+                    <h3>{machine.name}</h3>
+                    <p>
+                      <strong>Marca:</strong> {machine.brand}
+                    </p>
+                    <p>
+                      <strong>Ubicación:</strong> {machine.location}
+                    </p>
+                    <p>
+                      <strong>Precio de renta:</strong> ${machine.rental_price}
+                    </p>
+                    <p>{machine.description}</p>
+                  </div>
+
+                  {/* Botones al final */}
                   <div className="button-group">
                     <Button
                       variant="outlined"
@@ -168,7 +175,7 @@ const ProviderDashboard = () => {
             />
             <TextField
               fullWidth
-              label="Ubicación"
+              label="Ubicación"
               name="location"
               value={updatedMachine.location}
               onChange={handleChange}
@@ -186,7 +193,7 @@ const ProviderDashboard = () => {
             <TextField
               fullWidth
               multiline
-              label="Descripción"
+              label="Descripción"
               name="description"
               value={updatedMachine.description}
               onChange={handleChange}
@@ -204,11 +211,11 @@ const ProviderDashboard = () => {
         </Box>
       </Modal>
 
-      {/* Modal de Confirmación de Éxito */}
+      {/* Modal de Confirmación de Éxito */}
       <Modal open={openSuccess} onClose={() => setOpenSuccess(false)}>
         <Box className="modal-box">
-          <Typography variant="h6">✅ ¡Actualización Exitosa!</Typography>
-          <Typography>La máquina ha sido actualizada correctamente.</Typography>
+          <Typography variant="h6">✅ ¡Actualización Exitosa!</Typography>
+          <Typography>La máquina ha sido actualizada correctamente.</Typography>
         </Box>
       </Modal>
     </div>
