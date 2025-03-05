@@ -8,13 +8,20 @@
   --shadow: rgba(0, 0, 0, 0.15);
 }
 
+/* Asegurar que el body no introduzca espacios */
+body {
+  margin: 0;
+  padding: 0;
+}
+
 /* Contenedor principal */
 .home-container {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   padding: 2rem;
   background: linear-gradient(135deg, var(--light-gray) 0%, #e8ecef 100%);
   min-height: 100vh;
   overflow-x: hidden;
+  margin-top: 90px; /* Offset para el navbar fijo */
 }
 
 /* Navbar mejorado */
@@ -23,15 +30,22 @@
   justify-content: space-between; /* Distribución equitativa */
   align-items: center;
   padding: 1.5rem 4rem; /* Más padding horizontal para mayor espacio */
-  background: linear-gradient(90deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);
-  border-radius: 0 0 25px 25px; /* Bordes redondeados completos */
+  background: linear-gradient(
+    90deg,
+    var(--primary-orange) 0%,
+    var(--secondary-orange) 100%
+  );
+  border-radius: 0; /* Sin bordes redondeados para ocupar todo el ancho */
   box-shadow: 0 6px 20px var(--shadow);
-  position: sticky;
+  position: fixed; /* Fijo en la parte superior */
   top: 0;
+  left: 0; /* Alineado al borde izquierdo */
+  width: 100vw; /* Ancho completo del viewport */
+  max-width: 100%; /* Sin restricciones de ancho máximo */
+  margin: 0; /* Sin márgenes */
   z-index: 1000;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   min-height: 90px; /* Altura mínima más generosa */
-  width: 100%; /* Asegura que ocupe todo el ancho */
   box-sizing: border-box; /* Incluye padding en el cálculo del ancho */
 }
 
@@ -82,7 +96,7 @@
 }
 
 .navbar .nav-links li::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 0;
   height: 2px;
@@ -136,7 +150,7 @@
 }
 
 .machine-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -199,7 +213,7 @@
 }
 
 .machine-card button::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -279,7 +293,11 @@
   }
 }
 
+<<<<<<< HEAD
+/* Ajustes adicionales para el navbar */
+=======
 /* Ajustes adicionales para el navbar (sin logo) */
+>>>>>>> cb61d4041c16067060aa6e6439f67277579b863c
 .navbar-left {
   display: none; /* Quitamos el contenedor del logo ya que no lo usamos */
 }
@@ -293,12 +311,4 @@
 .nav-links {
   flex: 1;
   justify-content: flex-end;
-}
-
-/* Asegurar que el navbar ocupe todo el ancho */
-.navbar {
-  width: 100vw;
-  max-width: 100%;
-  margin: 0 auto;
-  box-sizing: border-box;
 }
