@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createMachine } from "../services/machineService"; // Asegúrate de que la ruta esté correcta
 
-const AddMachine = ({ providerId }) => {
+const AddMachine = () => {
   const [newMachine, setNewMachine] = useState({
     name: "",
     brand: "",
     location: "",
     description: "",
     rental_price: "",
-    image_code: "", // Aquí es donde el proveedor ingresará el enlace de la imagen
+    image_code: "",
     state: true,
-    provider_id: providerId, // Usamos el providerId que ya está disponible
+    provider_id: "", // Lo inicializamos vacío, se actualizará después
   });
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const user = getCurrentUser(); // Obtén el usuario actual (suponiendo que se guarda en Firebase o un estado global)
+    if (user && user.provider_id) {
+      setNewMachine((prev) => ({
+        ...prev,
+        provider_id: user.provider_id, // Establecemos el provider_id desde el usuario
+      }));
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,7 +36,8 @@ const AddMachine = ({ providerId }) => {
     e.preventDefault();
 
     try {
-      await createMachine(newMachine); // Enviamos la solicitud para crear la nueva máquina
+      // Aquí mandamos la solicitud para crear la máquina con los datos del formulario
+      await createMachine(newMachine);
       alert("¡Máquina creada con éxito!");
       setNewMachine({
         name: "",
@@ -36,8 +47,8 @@ const AddMachine = ({ providerId }) => {
         rental_price: "",
         image_code: "",
         state: true,
-        provider_id: providerId,
-      }); // Limpiamos el formulario después de crear la máquina
+        provider_id: newMachine.provider_id, // Mantén el provider_id
+      });
     } catch (error) {
       setError("Error al crear la máquina: " + error.message);
     }
