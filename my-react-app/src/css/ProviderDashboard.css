@@ -84,45 +84,26 @@
 
 /* Lista de máquinas */
 .machines-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  padding: 20px;
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
 }
 
 /* Tarjeta de máquina */
 .machine-card {
+  display: flex;
+  align-items: center;
   background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  gap: 15px;
 }
 
 .machine-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.machine-card img {
-  width: 100%;
-  border-radius: 10px;
-  height: 180px;
-  object-fit: cover;
-}
-
-.machine-card h3 {
-  color: #333;
-  margin: 10px 0;
-  font-size: 1.3rem;
-}
-
-.machine-card p {
-  color: #666;
-  font-size: 1rem;
-  margin: 5px 0;
+  transform: scale(1.02); /* Efecto sutil al pasar el mouse */
 }
 
 /* Botones de acción */
@@ -202,6 +183,64 @@
 .update-machine-form .cancel-btn:hover {
   background: #555;
 }
+/* Imagen de la máquina */
+.machine-image {
+  width: 100px;
+  height: 100px;
+  max-width: 300px; /* Añadido para evitar que se agrande */
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Información de la máquina */
+.machine-info {
+  flex: 1;
+  text-align: left;
+}
+
+.machine-info h3 {
+  color: #333;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.machine-info p {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 3px 0;
+}
+
+/* Botones dentro de la tarjeta */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.button-group button {
+  background: #f2a900;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: background 0.2s ease-in-out;
+}
+
+.button-group button:hover {
+  background: #ff8c00;
+}
+
+/* Botón "Eliminar" con color rojo */
+.button-group button:last-child {
+  background: #d9534f;
+}
+
+.button-group button:last-child:hover {
+  background: #c9302c;
+}
 
 /* Mensajes de error */
 .error-message {
@@ -209,14 +248,20 @@
   font-weight: bold;
   margin-top: 10px;
 }
-
-/* Responsividad */
+/* Responsividad para pantallas pequeñas */
 @media (max-width: 768px) {
-  .machines-list {
-    grid-template-columns: 1fr;
+  .machine-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
-  .update-machine-form {
-    width: 90%;
+  .machine-image {
+    margin-bottom: 10px;
+  }
+
+  .button-group {
+    flex-direction: row;
+    justify-content: center;
   }
 }
