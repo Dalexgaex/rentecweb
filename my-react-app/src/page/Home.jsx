@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../css/home.css"; // Importa los estilos
+import "../css/home.css"; // Asegúrate de que esta ruta sea correcta
 
 const Home = () => {
   const navigate = useNavigate();
@@ -10,8 +10,9 @@ const Home = () => {
   const [lastScrollY, setLastScrollY] = useState(0); // Para rastrear la posición anterior del scroll
   const [hidden, setHidden] = useState(false); // Para saber si el navbar debe estar oculto
 
+  // Fetch de las máquinas
   useEffect(() => {
-    fetch("https://rentek.onrender.com/machinery") // Cambia esto con la URL correcta para obtener las máquinas
+    fetch("https://rentek.onrender.com/machinery")
       .then((res) => res.json())
       .then((data) => {
         setMachines(data);
@@ -23,18 +24,36 @@ const Home = () => {
       });
   }, []);
 
+  // Lógica de scroll para ocultar/mostrar el navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      // Oculta el navbar solo si se desplaza hacia abajo y supera un umbral
+      setHidden(currentScrollY > lastScrollY && currentScrollY > 100);
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
   return (
     <div className="home-container">
-      {/* Navbar */}
+      {/* Navbar con contenedor adicional para mejor control de diseño */}
       <nav className={`navbar ${hidden ? "hidden" : ""}`}>
-        <img src="../src/assets/logo.png" alt="Logo" className="logo" />
-        <input
-          type="text"
-          placeholder="Buscar máquinas..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="search-bar"
-        />
+        <div className="navbar-left">
+          <img src="../src/assets/logo.png" alt="Logo Rentek" className="logo" />
+        </div>
+        <div className="navbar-center">
+          <input
+            type="text"
+            placeholder="Buscar máquinas..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="search-bar"
+            aria-label="Buscar máquinas" // Mejor accesibilidad
+          />
+        </div>
         <ul className="nav-links">
           <li onClick={() => navigate("/catalogo")}>Catálogo</li>
           <li onClick={() => navigate("/favoritos")}>Favoritos</li>
@@ -47,7 +66,7 @@ const Home = () => {
       {/* Contenedor de máquinas */}
       <div className="machines-container">
         {loading ? (
-          <p>Cargando máquinas...</p>
+          <p className="loading-text">Cargando máquinas...</p>
         ) : (
           machines
             .filter((machine) =>
