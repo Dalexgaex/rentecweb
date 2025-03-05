@@ -54,42 +54,31 @@ body {
   transform: translateY(-120%);
 }
 
-/* Logo */
-.navbar .logo {
-  width: clamp(80px, 10vw, 120px); /* Logo más grande y adaptable */
-  height: auto;
-  filter: drop-shadow(0 2px 4px var(--shadow));
-  transition: transform 0.3s ease;
-}
-
-.navbar .logo:hover {
-  transform: rotate(5deg) scale(1.1);
-}
-
-/* Barra de búsqueda */
+/* Barra de búsqueda (ahora más centrada sin logo) */
 .navbar .search-bar {
   padding: 0.9rem 1.8rem; /* Más espacio interno */
-  width: clamp(300px, 40vw, 450px); /* Ancho más generoso */
+  width: clamp(350px, 45vw, 500px); /* Ancho más generoso para ocupar más espacio */
   border-radius: 50px;
   border: none;
   background: rgba(255, 255, 255, 0.95);
   box-shadow: inset 0 2px 5px var(--shadow);
   font-size: 1.1rem; /* Texto un poco más grande */
   transition: all 0.3s ease;
-  margin: 0 3rem; /* Más espacio a los lados para no pegarse a otros elementos */
+  margin: 0 auto; /* Centrado horizontalmente */
 }
 
+/* Ajuste para centrar el buscador cuando no hay logo */
 .navbar .search-bar:focus {
-  width: clamp(320px, 45vw, 480px); /* Expansión más amplia al hacer foco */
+  width: clamp(370px, 50vw, 520px); /* Expansión más amplia al hacer foco */
   background: var(--white);
   box-shadow: 0 0 12px rgba(255, 145, 0, 0.6);
   outline: none;
 }
 
-/* Links de navegación */
+/* Links de navegación (ahora más espaciados) */
 .navbar .nav-links {
   display: flex;
-  gap: 3rem; /* Más espacio entre ítems */
+  gap: 3.5rem; /* Más espacio entre ítems para compensar la ausencia del logo */
   list-style: none;
   margin: 0;
   padding: 0;
@@ -253,12 +242,12 @@ body {
   }
 
   .navbar .search-bar {
-    width: clamp(250px, 35vw, 400px);
-    margin: 0 2rem;
+    width: clamp(300px, 40vw, 450px);
+    margin: 0 auto;
   }
 
   .navbar .nav-links {
-    gap: 2rem;
+    gap: 2.5rem;
   }
 }
 
@@ -267,10 +256,6 @@ body {
     flex-direction: column;
     padding: 1.5rem 2rem;
     border-radius: 0;
-  }
-
-  .navbar .logo {
-    margin-bottom: 1rem;
   }
 
   .navbar .search-bar {
@@ -308,15 +293,17 @@ body {
   }
 }
 
+<<<<<<< HEAD
 /* Ajustes adicionales para el navbar */
+=======
+/* Ajustes adicionales para el navbar (sin logo) */
+>>>>>>> cb61d4041c16067060aa6e6439f67277579b863c
 .navbar-left {
-  flex: 1;
-  display: flex;
-  justify-content: flex-start;
+  display: none; /* Quitamos el contenedor del logo ya que no lo usamos */
 }
 
 .navbar-center {
-  flex: 2;
+  flex: 1;
   display: flex;
   justify-content: center;
 }

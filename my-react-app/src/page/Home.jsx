@@ -39,21 +39,16 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* Navbar con contenedor adicional para mejor control de diseño */}
+      {/* Navbar sin logo */}
       <nav className={`navbar ${hidden ? "hidden" : ""}`}>
-        <div className="navbar-left">
-          <img src="../src/assets/logo.png" alt="Logo Rentek" className="logo" />
-        </div>
-        <div className="navbar-center">
-          <input
-            type="text"
-            placeholder="Buscar máquinas..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="search-bar"
-            aria-label="Buscar máquinas" // Mejor accesibilidad
-          />
-        </div>
+        <input
+          type="text"
+          placeholder="Buscar máquinas..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="search-bar"
+          aria-label="Buscar máquinas" // Mejor accesibilidad
+        />
         <ul className="nav-links">
           <li onClick={() => navigate("/catalogo")}>Catálogo</li>
           <li onClick={() => navigate("/favoritos")}>Favoritos</li>
