@@ -293,11 +293,7 @@ body {
   }
 }
 
-<<<<<<< HEAD
 /* Ajustes adicionales para el navbar */
-=======
-/* Ajustes adicionales para el navbar (sin logo) */
->>>>>>> cb61d4041c16067060aa6e6439f67277579b863c
 .navbar-left {
   display: none; /* Quitamos el contenedor del logo ya que no lo usamos */
 }
