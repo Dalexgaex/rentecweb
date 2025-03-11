@@ -7,10 +7,9 @@ const Home = () => {
   const [machines, setMachines] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0); // Para rastrear la posición anterior del scroll
-  const [hidden, setHidden] = useState(false); // Para saber si el navbar debe estar oculto
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [hidden, setHidden] = useState(false);
 
-  // Fetch de las máquinas
   useEffect(() => {
     fetch("https://rentek.onrender.com/machinery")
       .then((res) => res.json())
@@ -24,11 +23,9 @@ const Home = () => {
       });
   }, []);
 
-  // Lógica de scroll para ocultar/mostrar el navbar
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      // Oculta el navbar solo si se desplaza hacia abajo y supera un umbral
       setHidden(currentScrollY > lastScrollY && currentScrollY > 100);
       setLastScrollY(currentScrollY);
     };
@@ -39,7 +36,6 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* Navbar con contenedor adicional para mejor control de diseño */}
       <nav className={`navbar ${hidden ? "hidden" : ""}`}>
         <div className="navbar-left">
           <img src="../src/assets/logo.png" alt="Logo Rentek" className="logo" />
@@ -51,7 +47,7 @@ const Home = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="search-bar"
-            aria-label="Buscar máquinas" // Mejor accesibilidad
+            aria-label="Buscar máquinas"
           />
         </div>
         <ul className="nav-links">
@@ -63,7 +59,6 @@ const Home = () => {
         </ul>
       </nav>
 
-      {/* Contenedor de máquinas */}
       <div className="machines-container">
         {loading ? (
           <p className="loading-text">Cargando máquinas...</p>
@@ -89,8 +84,7 @@ const Home = () => {
                   <strong>Precio de renta:</strong> ${machine.rental_price}
                 </p>
                 <p>
-                  <strong>Estado:</strong>{" "}
-                  {machine.state ? "Disponible" : "No disponible"}
+                  <strong>Estado:</strong> {machine.state ? "Disponible" : "No disponible"}
                 </p>
                 <button onClick={() => navigate(`/maquina/${machine.id}`)}>
                   Ver detalles
