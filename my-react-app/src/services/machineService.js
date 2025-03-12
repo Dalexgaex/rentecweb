@@ -16,12 +16,25 @@ export const getProviderMachines = async (providerId) => {
 // Eliminar una máquina
 export const deleteMachine = async (id) => {
   try {
-    const response = await fetch(`https://rentek.onrender.com/machinery/${id}`, { method: "DELETE" });
-    if (!response.ok) throw new Error("Error al eliminar la máquina");
+    const response = await fetch(`https://rentek.onrender.com/machinery/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("token")}`, // Asegúrate de tener un token válido
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
+
+    return await response.json();
   } catch (error) {
-    throw new Error(error.message || "Error al eliminar la máquina");
+    console.error("Error al eliminar la máquina:", error);
+    throw error;
   }
 };
+
 
 // Actualizar una máquina
 export const updateMachine = async (id, machineData) => {
