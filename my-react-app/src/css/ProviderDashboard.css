@@ -1,111 +1,69 @@
-/* Variables globales para colores y consistencia */
-:root {
-  --primary-orange: #ff8c00;
-  --secondary-orange: #f2a900;
-  --error-red: #d9534f;
-  --dark-gray: #1a1a1a;
-  --light-gray: #f8f8f8;
-  --white: #ffffff;
-  --shadow: rgba(0, 0, 0, 0.15);
-}
-
-/* Estilos generales */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', sans-serif; /* Tipografía moderna y profesional */
-  background: linear-gradient(135deg, var(--light-gray) 0%, #f0f4f8 100%);
-  line-height: 1.6;
+/* Contenedor principal */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 15px;
+  background-color: #f8f8f8;
   min-height: 100vh;
 }
 
-/* Contenedor principal del dashboard */
-.provider-dashboard {
-  padding: clamp(1.5rem, 2vw, 2.5rem);
-  text-align: center;
-  background: var(--light-gray);
-  min-height: 100vh;
-}
-
-/* Títulos */
+/* Título principal */
 .provider-dashboard h1 {
-  color: var(--primary-orange);
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  text-transform: uppercase; /* Para un look más profesional */
+  color: #ff8c00;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 15px;
 }
 
-.provider-dashboard h2 {
-  color: var(--secondary-orange);
-  font-size: clamp(1.3rem, 2vw, 1.8rem);
-  margin: 2rem 0 1rem;
-  font-weight: 600;
-}
-
-/* Botón agregar máquina */
+/* Botón "Agregar Máquina" */
 .add-machine-btn {
-  background: var(--primary-orange);
-  color: var(--white);
-  padding: clamp(0.8rem, 1.5vw, 1rem) clamp(1.5rem, 2.5vw, 2rem);
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
-  font-weight: 600;
+  display: block;
+  margin: 0 auto 15px;
+  background-color: #ff8c00;
+  color: white;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  font-weight: bold;
   border: none;
-  border-radius: 12px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 12px var(--shadow);
+  transition: background 0.3s ease-in-out;
 }
 
 .add-machine-btn:hover {
-  background: var(--secondary-orange);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(255, 140, 0, 0.4);
+  background-color: #f2a900;
 }
 
 /* Lista de máquinas */
 .machines-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: clamp(1rem, 2vw, 1.5rem);
-  padding: clamp(0.5rem, 1vw, 1rem);
-  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
 }
 
 /* Tarjeta de máquina */
 .machine-card {
   display: flex;
   align-items: center;
-  background: var(--white);
-  padding: clamp(1rem, 1.5vw, 1.5rem);
-  border-radius: 15px; /* Bordes más redondeados */
-  box-shadow: 0 5px 15px var(--shadow);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  gap: clamp(1rem, 1.5vw, 1.5rem);
-  overflow: hidden; /* Evita desbordamientos */
+  background: white;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  gap: 15px;
 }
 
 .machine-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02); /* Efecto sutil al pasar el mouse */
 }
 
 /* Imagen de la máquina */
 .machine-image {
-  width: clamp(100px, 15vw, 150px);
-  height: clamp(100px, 15vw, 150px);
-  border-radius: 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
   object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.machine-card:hover .machine-image {
-  transform: scale(1.1);
 }
 
 /* Información de la máquina */
@@ -115,226 +73,63 @@ body {
 }
 
 .machine-info h3 {
-  color: var(--dark-gray);
-  font-size: clamp(1.1rem, 1.8vw, 1.3rem);
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+  color: #333;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
 }
 
 .machine-info p {
   color: #666;
-  font-size: clamp(0.9rem, 1.5vw, 1rem);
-  margin: 0.3rem 0;
-  line-height: 1.4;
+  font-size: 0.9rem;
+  margin: 3px 0;
 }
 
 /* Botones dentro de la tarjeta */
 .button-group {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.5rem, 1vw, 0.8rem);
+  gap: 8px;
 }
 
 .button-group button {
-  background: var(--secondary-orange);
-  color: var(--white);
+  background: #f2a900;
+  color: white;
   border: none;
-  padding: clamp(0.6rem, 1vw, 0.8rem) clamp(1rem, 1.5vw, 1.2rem);
+  padding: 8px 12px;
   cursor: pointer;
-  border-radius: 8px;
-  font-size: clamp(0.9rem, 1.3vw, 1rem);
-  font-weight: 600;
-  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: background 0.2s ease-in-out;
 }
 
 .button-group button:hover {
-  background: var(--primary-orange);
-  transform: translateY(-2px);
-  box-shadow: 0 3px 10px rgba(255, 140, 0, 0.3);
+  background: #ff8c00;
 }
 
 /* Botón "Eliminar" con color rojo */
 .button-group button:last-child {
-  background: var(--error-red);
+  background: #d9534f;
 }
 
 .button-group button:last-child:hover {
   background: #c9302c;
 }
 
-/* Formulario de edición */
-.update-machine-form {
-  background: var(--white);
-  padding: clamp(1.5rem, 2vw, 2rem);
-  border-radius: 15px;
-  box-shadow: 0 6px 20px var(--shadow);
-  width: clamp(300px, 50vw, 600px); /* Ancho adaptable */
-  margin: 2rem auto;
-  text-align: left;
-}
-
-.update-machine-form label {
-  font-weight: 600;
-  display: block;
-  margin-bottom: 0.5rem;
-  color: var(--dark-gray);
-}
-
-.update-machine-form input,
-.update-machine-form textarea {
-  width: 100%;
-  padding: clamp(0.8rem, 1.2vw, 1rem);
-  margin-bottom: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: clamp(0.9rem, 1.3vw, 1rem);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.update-machine-form input:focus,
-.update-machine-form textarea:focus {
-  border-color: var(--primary-orange);
-  box-shadow: 0 0 8px rgba(255, 140, 0, 0.5);
-}
-
-.update-machine-form button {
-  background: var(--secondary-orange);
-  color: var(--white);
-  padding: clamp(0.8rem, 1.2vw, 1rem) clamp(1.5rem, 2vw, 1.8rem);
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
-  font-weight: 600;
-  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.update-machine-form button:hover {
-  background: var(--primary-orange);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 140, 0, 0.4);
-}
-
-.update-machine-form .cancel-btn {
-  background: #777;
-  margin-left: 1rem;
-}
-
-.update-machine-form .cancel-btn:hover {
-  background: #555;
-  transform: translateY(-2px);
-  box-shadow: 0 3px 10px rgba(85, 85, 85, 0.3);
-}
-
-/* Mensajes de error */
-.error-message {
-  color: var(--error-red);
-  font-weight: 500;
-  font-size: clamp(0.9rem, 1.3vw, 1rem);
-  margin-top: 1rem;
-  background: rgba(217, 83, 79, 0.1);
-  padding: 0.8rem 1.2rem;
-  border-radius: 8px;
-  transition: opacity 0.3s ease;
-}
-
-/* Responsividad mejorada */
-@media (max-width: 1024px) {
-  .provider-dashboard {
-    padding: clamp(1rem, 1.5vw, 1.5rem);
-  }
-
-  .machines-list {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  }
-
-  .update-machine-form {
-    width: clamp(250px, 80vw, 500px);
-  }
-}
-
+/* Responsividad para pantallas pequeñas */
 @media (max-width: 768px) {
-  .provider-dashboard h1 {
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
-  }
-
-  .provider-dashboard h2 {
-    font-size: clamp(1.1rem, 1.8vw, 1.5rem);
-  }
-
   .machine-card {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: clamp(1rem, 1.5vw, 1.3rem);
   }
 
   .machine-image {
-    margin-bottom: 1rem;
+    margin-bottom: 10px;
   }
 
   .button-group {
     flex-direction: row;
     justify-content: center;
-    gap: clamp(0.5rem, 1vw, 0.8rem);
-    margin-top: 1rem;
-  }
-
-  .update-machine-form {
-    width: clamp(200px, 90vw, 400px);
-    padding: clamp(1rem, 1.5vw, 1.5rem);
-  }
-}
-
-@media (max-width: 480px) {
-  .provider-dashboard {
-    padding: clamp(0.8rem, 1vw, 1rem);
-  }
-
-  .machines-list {
-    grid-template-columns: 1fr;
-  }
-
-  .add-machine-btn {
-    padding: clamp(0.7rem, 1vw, 0.9rem) clamp(1.2rem, 1.8vw, 1.5rem);
-    font-size: clamp(0.9rem, 1.2vw, 1rem);
-  }
-
-  .machine-card {
-    padding: clamp(0.8rem, 1.2vw, 1rem);
-  }
-
-  .machine-image {
-    width: clamp(80px, 15vw, 120px);
-    height: clamp(80px, 15vw, 120px);
-  }
-
-  .machine-info h3 {
-    font-size: clamp(1rem, 1.5vw, 1.2rem);
-  }
-
-  .machine-info p {
-    font-size: clamp(0.8rem, 1.2vw, 0.9rem);
-  }
-
-  .button-group button {
-    padding: clamp(0.5rem, 0.8vw, 0.7rem) clamp(0.8rem, 1.2vw, 1rem);
-    font-size: clamp(0.8rem, 1.1vw, 0.9rem);
-  }
-
-  .update-machine-form {
-    width: 90vw;
-    padding: clamp(0.8rem, 1.2vw, 1rem);
-  }
-
-  .update-machine-form input,
-  .update-machine-form textarea {
-    padding: clamp(0.6rem, 0.9vw, 0.8rem);
-    font-size: clamp(0.8rem, 1.1vw, 0.9rem);
-  }
-
-  .update-machine-form button {
-    padding: clamp(0.7rem, 1vw, 0.9rem) clamp(1rem, 1.5vw, 1.3rem);
-    font-size: clamp(0.9rem, 1.2vw, 0.9rem);
   }
 }
