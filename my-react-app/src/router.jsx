@@ -21,6 +21,7 @@ const AppRoutes = () => {
         <Route path="/add-machine" element={<AddMachinePage />} />
         <Route path="/mis-maquinas" element={<MyMachines />} />
         <Route path="/maquina/:id" element={<MachineDetails />} /> {/* Nueva ruta dinámica */}
+        
       </Routes>
     </Router>
   );

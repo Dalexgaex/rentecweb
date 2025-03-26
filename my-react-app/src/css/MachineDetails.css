@@ -3,12 +3,12 @@
   padding: 3.5rem;
   max-width: 950px;
   margin: 0 auto;
-  background: linear-gradient(145deg, #ffffff 0%, #f5f7fa 100%); /* Gradiente más suave */
+  background: linear-gradient(145deg, #ffffff 0%, #f9f9f9 100%); /* Fondo blanco suave */
   border-radius: 25px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   margin-top: 140px; /* Más espacio para navbar */
   font-family: "Poppins", sans-serif;
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Borde suave en negro */
   position: relative;
   overflow: hidden;
 }
@@ -21,13 +21,13 @@
   left: 0;
   width: 100%;
   height: 5px;
-  background: linear-gradient(to right, #ff6f00, #00aaff);
+  background: linear-gradient(to right, #f7b500, #f9c846); /* Amarillo cálido */
 }
 
 /* Título */
 .machine-details-container h1 {
   font-size: 3rem;
-  color: #1a1a1a;
+  color: #1a1a1a; /* Negro profundo */
   margin-bottom: 2.5rem;
   text-align: center;
   font-weight: 700;
@@ -43,7 +43,7 @@
   object-fit: cover;
   border-radius: 20px;
   margin-bottom: 2.5rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra más suave */
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
@@ -55,7 +55,7 @@
 /* Detalles de texto */
 .machine-details-container p {
   font-size: 1.4rem;
-  color: #333;
+  color: #333; /* Color negro suave */
   margin-bottom: 1.5rem;
   line-height: 1.8;
   padding: 0 1.5rem;
@@ -97,31 +97,31 @@
 
 /* Botón de Rentar */
 .machine-details-container .rent-button {
-  background: linear-gradient(135deg, #ff6f00, #ff8c00);
+  background: linear-gradient(135deg, #f7b500, #ff8c00); /* Amarillo brillante a naranja cálido */
   color: white;
 }
 
 .machine-details-container .rent-button:hover {
-  background: linear-gradient(135deg, #ff8c00, #ffa500);
+  background: linear-gradient(135deg, #ff8c00, #f7a400); /* Naranja a un tono más claro */
   transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(255, 111, 0, 0.5);
 }
 
 /* Botón de Cotizar */
 .machine-details-container .quote-button {
-  background: linear-gradient(135deg, #00aaff, #0088cc);
+  background: linear-gradient(135deg, #333333, #222222); /* Color negro suave */
   color: white;
 }
 
 .machine-details-container .quote-button:hover {
-  background: linear-gradient(135deg, #0088cc, #006699);
+  background: linear-gradient(135deg, #222222, #111111); /* Transición a tonos más oscuros */
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 170, 255, 0.5);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Botón de Volver */
 .machine-details-container .back-button {
-  background: linear-gradient(135deg, #4a4a4a, #5e5e5e);
+  background: linear-gradient(135deg, #4a4a4a, #5e5e5e); /* Gris oscuro a gris medio */
   color: white;
 }
 
