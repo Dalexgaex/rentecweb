@@ -4,7 +4,9 @@ import Register from "./components/Register";
 import Home from "./page/Home";
 import ProviderLogin from "./components/ProviderLogin";
 import ProviderDashboard from "./page/ProviderDashboard";
-import AddMachinePage from "./page/AddMachinePage";  // Importa la página para agregar una máquina
+import AddMachinePage from "./page/AddMachinePage";
+import MyMachines from "./components/MyMachines"; 
+
 
 const AppRoutes = () => {
   return (
@@ -16,7 +18,8 @@ const AppRoutes = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/provider-login" element={<ProviderLogin />} />
         <Route path="/provider-dashboard" element={<ProviderDashboard />} />
-        <Route path="/add-machine" element={<AddMachinePage />} />  {/* Ruta para agregar máquina */}
+        <Route path="/add-machine" element={<AddMachinePage />} />
+        <Route path="/mis-maquinas" element={<MyMachines />} />
       </Routes>
     </Router>
   );
