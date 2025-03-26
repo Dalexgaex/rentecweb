@@ -1,34 +1,31 @@
-const API_URL = "https://rentek.onrender.com/machinery";
-
-// Crear una nueva máquina usando /machinery/bulk
-export const createMachine = async (machineData) => {
+export const createMachine = async (machineData, imageFile) => {
   try {
-    const providerId = localStorage.getItem("providerId");
-    if (!providerId) throw new Error("No se encontró el ID del proveedor");
+    const providerData = JSON.parse(localStorage.getItem('providerData'));
+    if (!providerData || !providerData.id) {
+      throw new Error('No se encontró ID del proveedor');
+    }
 
-    const BULK_URL = `${API_URL}/bulk`;
-    console.log("Enviando solicitud a:", BULK_URL);
-    console.log("Datos enviados:", [machineData]); // Envolvemos en un arreglo para /bulk
+    // Convertir los datos en un array como lo espera el endpoint bulk
+    const machinePayload = [{
+      ...machineData,
+      provider_id: providerData.id
+    }];
 
-    const response = await fetch(BULK_URL, {
-      method: "POST",
+    const response = await fetch('https://rentek.onrender.com/machinery/bulk', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        // "Authorization": `Bearer ${localStorage.getItem("token")}`, // Descomentado si el backend lo requiere
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify([machineData]), // Enviar como arreglo
+      body: JSON.stringify(machinePayload)
     });
 
     if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Error ${response.status}: ${errorText || "No se pudo crear la máquina"}`);
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Error al crear la máquina');
     }
 
-    const result = await response.json();
-    console.log("Respuesta del servidor:", result);
-    return result;
+    return await response.json();
   } catch (error) {
-    console.error("Error en createMachine (bulk):", error);
-    throw error;
+    throw new Error('Error al crear la máquina: ' + error.message);
   }
 };

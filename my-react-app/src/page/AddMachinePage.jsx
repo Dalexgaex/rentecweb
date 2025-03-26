@@ -11,31 +11,25 @@ const AddMachine = () => {
     location: "",
     description: "",
     rental_price: "",
-    image_code: "",
+    image_code: "", // Mantenemos image_code como string
     state: true,
-    provider_id: "",
   });
+  const [selectedImage, setSelectedImage] = useState(null);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedProviderId = localStorage.getItem("providerId") || "3772a608-06cc-4ff4-8c69-8fb28452269e";
-    if (storedProviderId) {
-      setNewMachine((prev) => ({
-        ...prev,
-        provider_id: storedProviderId,
-      }));
-    } else {
+    const providerData = localStorage.getItem('providerData');
+    if (!providerData) {
       setError("No se encontró un proveedor autenticado.");
+      navigate('/provider-login');
     }
-  }, []);
+  }, [navigate]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewMachine((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  const handleImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedImage(e.target.files[0]);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -45,7 +39,6 @@ const AddMachine = () => {
         throw new Error("Todos los campos obligatorios deben estar llenos.");
       }
 
-      // Convertimos rental_price a número para evitar problemas de formato
       const machineData = {
         ...newMachine,
         rental_price: Number(newMachine.rental_price),
@@ -54,21 +47,19 @@ const AddMachine = () => {
       const response = await createMachine(machineData);
       console.log("Máquina creada:", response);
       alert("¡Máquina creada con éxito!");
-      setNewMachine({
-        name: "",
-        brand: "",
-        location: "",
-        description: "",
-        rental_price: "",
-        image_code: "",
-        state: true,
-        provider_id: newMachine.provider_id,
-      });
       navigate("/provider-dashboard");
     } catch (error) {
       setError("Error al crear la máquina: " + error.message);
       console.error("Error en handleSubmit:", error);
     }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewMachine((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   return (
