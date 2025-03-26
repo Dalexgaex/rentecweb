@@ -3,7 +3,7 @@ const API_URL = "https://rentek.onrender.com/machinery";
 // Obtener las máquinas del proveedor
 export const getProviderMachines = async () => {
   try {
-    const providerId = localStorage.getItem("providerId"); // Obtiene el ID del proveedor en sesión
+    const providerId = localStorage.getItem("providerId");
     if (!providerId) throw new Error("No se encontró el ID del proveedor en sesión");
 
     const response = await fetch(`${API_URL}?providerId=${providerId}`);
@@ -22,7 +22,7 @@ export const deleteMachine = async (id) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("token")}`, // Asegúrate de tener un token válido
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
       },
     });
 
@@ -51,21 +51,36 @@ export const updateMachine = async (id, machineData) => {
   }
 };
 
-// Crear una nueva máquina
+// Crear una nueva máquina (sin requerir token para pruebas)
 export const createMachine = async (machineData) => {
   try {
-    const response = await fetch(API_URL, {
+    const providerId = localStorage.getItem("providerId");
+    if (!providerId) throw new Error("No se encontró el ID del proveedor");
+
+    const CREATE_URL = `${API_URL}/by-provider`; // Usamos el endpoint tentativo
+    console.log("Enviando solicitud a:", CREATE_URL);
+    console.log("Datos enviados:", machineData);
+
+    const response = await fetch(CREATE_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        // Comentamos la autorización para pruebas
+        // "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      },
       body: JSON.stringify(machineData),
     });
 
     if (!response.ok) {
-      throw new Error("Error al crear la máquina");
+      const errorText = await response.text();
+      throw new Error(`Error ${response.status}: ${errorText || "No se pudo crear la máquina"}`);
     }
 
-    return await response.json();
+    const result = await response.json();
+    console.log("Respuesta del servidor:", result);
+    return result;
   } catch (error) {
-    throw new Error(error.message || "Error al crear la máquina");
+    console.error("Error en createMachine:", error);
+    throw error;
   }
 };

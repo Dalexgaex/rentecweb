@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { createMachine } from "../services/machineService"; // Asegúrate de que la ruta esté correcta
+import { createMachine } from "../services/machineService";
+import { useNavigate } from "react-router-dom";
+import { Button, TextField, Typography, Box } from "@mui/material";
+import "../css/ProviderDashboard.css";
 
 const AddMachine = () => {
   const [newMachine, setNewMachine] = useState({
@@ -10,17 +13,20 @@ const AddMachine = () => {
     rental_price: "",
     image_code: "",
     state: true,
-    provider_id: "", // Lo inicializamos vacío, se actualizará después
+    provider_id: "",
   });
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const user = getCurrentUser(); // Obtén el usuario actual (suponiendo que se guarda en Firebase o un estado global)
-    if (user && user.provider_id) {
+    const storedProviderId = localStorage.getItem("providerId") || "3772a608-06cc-4ff4-8c69-8fb28452269e";
+    if (storedProviderId) {
       setNewMachine((prev) => ({
         ...prev,
-        provider_id: user.provider_id, // Establecemos el provider_id desde el usuario
+        provider_id: storedProviderId,
       }));
+    } else {
+      setError("No se encontró un proveedor autenticado.");
     }
   }, []);
 
@@ -34,10 +40,13 @@ const AddMachine = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      // Aquí mandamos la solicitud para crear la máquina con los datos del formulario
-      await createMachine(newMachine);
+      if (!newMachine.name || !newMachine.brand || !newMachine.location || !newMachine.rental_price) {
+        throw new Error("Todos los campos obligatorios deben estar llenos.");
+      }
+
+      const response = await createMachine(newMachine);
+      console.log("Máquina creada:", response);
       alert("¡Máquina creada con éxito!");
       setNewMachine({
         name: "",
@@ -47,81 +56,98 @@ const AddMachine = () => {
         rental_price: "",
         image_code: "",
         state: true,
-        provider_id: newMachine.provider_id, // Mantén el provider_id
+        provider_id: newMachine.provider_id,
       });
+      navigate("/provider-dashboard");
     } catch (error) {
       setError("Error al crear la máquina: " + error.message);
+      console.error("Error en handleSubmit:", error);
     }
   };
 
   return (
-    <div>
-      <h1>Agregar Nueva Máquina</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Nombre:</label>
-          <input
-            type="text"
-            id="name"
+    <div className="container">
+      <Box className="provider-dashboard">
+        <Typography variant="h4" component="h1" gutterBottom>
+          Agregar Nueva Máquina
+        </Typography>
+        {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
+        <form onSubmit={handleSubmit} style={{ maxWidth: "600px", margin: "0 auto" }}>
+          <TextField
+            fullWidth
+            label="Nombre"
             name="name"
             value={newMachine.name}
             onChange={handleChange}
+            required
+            margin="normal"
+            variant="outlined"
           />
-        </div>
-        <div>
-          <label htmlFor="brand">Marca:</label>
-          <input
-            type="text"
-            id="brand"
+          <TextField
+            fullWidth
+            label="Marca"
             name="brand"
             value={newMachine.brand}
             onChange={handleChange}
+            required
+            margin="normal"
+            variant="outlined"
           />
-        </div>
-        <div>
-          <label htmlFor="location">Ubicación:</label>
-          <input
-            type="text"
-            id="location"
+          <TextField
+            fullWidth
+            label="Ubicación"
             name="location"
             value={newMachine.location}
             onChange={handleChange}
+            required
+            margin="normal"
+            variant="outlined"
           />
-        </div>
-        <div>
-          <label htmlFor="description">Descripción:</label>
-          <textarea
-            id="description"
+          <TextField
+            fullWidth
+            label="Descripción"
             name="description"
             value={newMachine.description}
             onChange={handleChange}
+            multiline
+            rows={3}
+            margin="normal"
+            variant="outlined"
           />
-        </div>
-        <div>
-          <label htmlFor="rental_price">Precio de Renta:</label>
-          <input
+          <TextField
+            fullWidth
+            label="Precio de Renta"
             type="number"
-            id="rental_price"
             name="rental_price"
             value={newMachine.rental_price}
             onChange={handleChange}
+            required
+            margin="normal"
+            variant="outlined"
           />
-        </div>
-        <div>
-          <label htmlFor="image_code">Enlace de Imagen:</label>
-          <input
-            type="text"
-            id="image_code"
+          <TextField
+            fullWidth
+            label="Enlace de Imagen"
             name="image_code"
             value={newMachine.image_code}
             onChange={handleChange}
+            margin="normal"
+            variant="outlined"
           />
-        </div>
-        <div>
-          <button type="submit">Crear Máquina</button>
-        </div>
-      </form>
+          <Box className="button-container" sx={{ mt: 3 }}>
+            <Button type="submit" variant="contained" className="add-machine-btn">
+              Crear Máquina
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => navigate("/provider-dashboard")}
+              sx={{ ml: 2 }}
+            >
+              Cancelar
+            </Button>
+          </Box>
+        </form>
+      </Box>
     </div>
   );
 };
