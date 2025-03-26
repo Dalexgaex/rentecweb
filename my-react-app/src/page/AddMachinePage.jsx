@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { createMachine } from "../services/machineService";
+import { createMachine } from "../services/machineServiceBulk"; // Importamos desde el nuevo archivo
 import { useNavigate } from "react-router-dom";
 import { Button, TextField, Typography, Box } from "@mui/material";
 import "../css/ProviderDashboard.css";
@@ -45,7 +45,13 @@ const AddMachine = () => {
         throw new Error("Todos los campos obligatorios deben estar llenos.");
       }
 
-      const response = await createMachine(newMachine);
+      // Convertimos rental_price a número para evitar problemas de formato
+      const machineData = {
+        ...newMachine,
+        rental_price: Number(newMachine.rental_price),
+      };
+
+      const response = await createMachine(machineData);
       console.log("Máquina creada:", response);
       alert("¡Máquina creada con éxito!");
       setNewMachine({

@@ -50,35 +50,3 @@ export const updateMachine = async (id, machineData) => {
     throw new Error(error.message || "Error al actualizar la máquina");
   }
 };
-
-// Crear una nueva máquina
-export const createMachine = async (machineData) => {
-  try {
-    const providerId = localStorage.getItem("providerId");
-    if (!providerId) throw new Error("No se encontró el ID del proveedor");
-
-    console.log("Enviando solicitud a:", API_URL);
-    console.log("Datos enviados:", machineData);
-
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // "Authorization": `Bearer ${localStorage.getItem("token")}`, // Descomentado si el backend lo requiere
-      },
-      body: JSON.stringify(machineData),
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Error ${response.status}: ${errorText || "No se pudo crear la máquina"}`);
-    }
-
-    const result = await response.json();
-    console.log("Respuesta del servidor:", result);
-    return result;
-  } catch (error) {
-    console.error("Error en createMachine:", error);
-    throw error;
-  }
-};
