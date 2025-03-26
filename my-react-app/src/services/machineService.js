@@ -51,22 +51,20 @@ export const updateMachine = async (id, machineData) => {
   }
 };
 
-// Crear una nueva máquina (sin requerir token para pruebas)
+// Crear una nueva máquina
 export const createMachine = async (machineData) => {
   try {
     const providerId = localStorage.getItem("providerId");
     if (!providerId) throw new Error("No se encontró el ID del proveedor");
 
-    const CREATE_URL = `${API_URL}/by-provider`; // Usamos el endpoint tentativo
-    console.log("Enviando solicitud a:", CREATE_URL);
+    console.log("Enviando solicitud a:", API_URL);
     console.log("Datos enviados:", machineData);
 
-    const response = await fetch(CREATE_URL, {
+    const response = await fetch(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // Comentamos la autorización para pruebas
-        // "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        // "Authorization": `Bearer ${localStorage.getItem("token")}`, // Descomentado si el backend lo requiere
       },
       body: JSON.stringify(machineData),
     });
