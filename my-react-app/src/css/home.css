@@ -12,41 +12,40 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: "Inter", sans-serif;
 }
 
 /* Contenedor principal */
 .home-container {
-  font-family: "Inter", sans-serif;
-  padding: 2rem;
-  background: linear-gradient(135deg, var(--light-gray) 0%, #e8ecef 100%);
+  padding: 1rem;
+  background: var(--white);
   min-height: 100vh;
   overflow-x: hidden;
-  margin-top: 90px; /* Offset para el navbar fijo */
+  margin-top: 90px;
 }
 
 /* Navbar mejorado */
 .navbar {
   display: flex;
-  justify-content: space-between; /* Distribución equitativa */
+  justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 4rem; /* Más padding horizontal para mayor espacio */
+  padding: 1rem 2rem;
   background: linear-gradient(
     90deg,
     var(--primary-orange) 0%,
     var(--secondary-orange) 100%
   );
-  border-radius: 0; /* Sin bordes redondeados para ocupar todo el ancho */
-  box-shadow: 0 6px 20px var(--shadow);
-  position: fixed; /* Fijo en la parte superior */
+  box-shadow: 0 4px 15px var(--shadow);
+  position: fixed;
   top: 0;
-  left: 0; /* Alineado al borde izquierdo */
-  width: 100vw; /* Ancho completo del viewport */
-  max-width: 100%; /* Sin restricciones de ancho máximo */
-  margin: 0; /* Sin márgenes */
+  left: 0;
+  width: 100vw;
+  max-width: 100%;
+  margin: 0;
   z-index: 1000;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  min-height: 90px; /* Altura mínima más generosa */
-  box-sizing: border-box; /* Incluye padding en el cálculo del ancho */
+  min-height: 70px;
+  box-sizing: border-box;
 }
 
 /* Clase para ocultar el navbar (si se usa) */
@@ -56,7 +55,7 @@ body {
 
 /* Logo */
 .navbar .logo {
-  width: clamp(80px, 10vw, 120px); /* Logo más grande y adaptable */
+  width: clamp(60px, 8vw, 100px);
   height: auto;
   filter: drop-shadow(0 2px 4px var(--shadow));
   transition: transform 0.3s ease;
@@ -68,19 +67,19 @@ body {
 
 /* Barra de búsqueda */
 .navbar .search-bar {
-  padding: 0.9rem 1.8rem; /* Más espacio interno */
-  width: clamp(300px, 40vw, 450px); /* Ancho más generoso */
+  padding: 0.7rem 1.5rem;
+  width: clamp(250px, 35vw, 400px);
   border-radius: 50px;
   border: none;
   background: rgba(255, 255, 255, 0.95);
   box-shadow: inset 0 2px 5px var(--shadow);
-  font-size: 1.1rem; /* Texto un poco más grande */
+  font-size: 1rem;
   transition: all 0.3s ease;
-  margin: 0 3rem; /* Más espacio a los lados para no pegarse a otros elementos */
+  margin: 0 2rem;
 }
 
 .navbar .search-bar:focus {
-  width: clamp(320px, 45vw, 480px); /* Expansión más amplia al hacer foco */
+  width: clamp(270px, 40vw, 420px);
   background: var(--white);
   box-shadow: 0 0 12px rgba(255, 145, 0, 0.6);
   outline: none;
@@ -89,7 +88,7 @@ body {
 /* Links de navegación */
 .navbar .nav-links {
   display: flex;
-  gap: 3rem; /* Más espacio entre ítems */
+  gap: 2rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -100,9 +99,9 @@ body {
   position: relative;
   color: var(--white);
   font-weight: 500;
-  font-size: 1.3rem; /* Tamaño más grande para legibilidad */
+  font-size: 1.1rem;
   cursor: pointer;
-  padding: 0.7rem 1.2rem; /* Más área clickable */
+  padding: 0.5rem 1rem;
   transition: all 0.3s ease;
 }
 
@@ -130,7 +129,7 @@ body {
 .navbar .proveedor {
   color: var(--white);
   font-weight: 600;
-  padding: 0.7rem 1.8rem;
+  padding: 0.5rem 1.5rem;
   background: rgba(255, 255, 255, 0.15);
   border-radius: 25px;
   transition: all 0.3s ease;
@@ -143,180 +142,192 @@ body {
 /* Contenedor de máquinas */
 .machines-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
-  padding: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); /* Aumentamos el ancho mínimo a 360px */
+  gap: 1.5rem;
+  margin-top: 1rem;
+  padding: 1rem 2rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Tarjetas de máquinas */
 .machine-card {
   background: var(--white);
-  border-radius: 20px;
-  padding: 1.5rem;
-  box-shadow: 0 8px 25px var(--shadow);
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 10px;
+  border: 1px solid #ff6f00;
+  padding: 1.2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
   position: relative;
-  overflow: visible; /* Cambiado de hidden a visible para que el contenido no se corte */
-  display: flex; /* Usamos flex para organizar el contenido */
-  flex-direction: column; /* Apilamos los elementos verticalmente */
-  justify-content: space-between; /* Distribuimos el espacio */
-  min-height: 400px; /* Altura mínima para asegurar que quepa todo */
-}
-
-.machine-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 450px; /* Aumentamos la altura mínima a 450px */
+  height: auto; /* Permitimos que la altura se ajuste al contenido */
   width: 100%;
-  height: 4px;
-  background: var(--primary-orange);
-  transition: width 0.3s ease;
 }
 
 .machine-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 15px 35px rgba(255, 111, 0, 0.2);
-}
-
-.machine-card:hover::before {
-  width: 0;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(255, 111, 0, 0.15);
 }
 
 .machine-card img {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 15px;
-  transition: transform 0.4s ease;
+  height: 150px;
+  object-fit: contain;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
 }
 
 .machine-card:hover img {
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
 .machine-card h3 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: var(--dark-gray);
-  margin: 1rem 0 0.5rem;
+  margin: 0.5rem 0;
   font-weight: 600;
-  letter-spacing: -0.02em;
-  word-wrap: break-word; /* Para evitar desbordamiento horizontal */
+  letter-spacing: -0.01em;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Aumentamos a 3 líneas para el título */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .machine-card p {
   color: #666;
-  font-size: 1rem;
-  line-height: 1.5;
-  margin-bottom: 0.75rem;
-  word-wrap: break-word; /* Evita que el texto se salga */
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0.3rem 0;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* Aumentamos a 5 líneas para los párrafos */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.machine-card p strong {
-  color: var(--dark-gray); /* Resalta los títulos de los datos */
+/* Contenedor para el estado y el botón */
+.machine-card .card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
 }
 
+/* Estilo para el estado */
+.machine-card .status {
+  font-size: 0.85rem;
+  color: #28a745;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Estilo para el botón */
 .machine-card button {
   background: var(--primary-orange);
   color: var(--white);
   border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   cursor: pointer;
   transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  align-self: flex-end; /* Asegura que el botón esté al final de la card */
-  margin-top: auto; /* Empuja el botón al fondo del contenedor flex */
-}
-
-.machine-card button::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: all 0.5s ease;
 }
 
 .machine-card button:hover {
   background: var(--secondary-orange);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
-.machine-card button:hover::after {
-  width: 200%;
-  height: 200%;
-}
-
-/* Responsividad para el navbar */
+/* Responsividad */
 @media (max-width: 1024px) {
   .navbar {
-    padding: 1.5rem 3rem;
+    padding: 1rem 1.5rem;
   }
 
   .navbar .search-bar {
-    width: clamp(250px, 35vw, 400px);
-    margin: 0 2rem;
+    width: clamp(200px, 30vw, 350px);
+    margin: 0 1.5rem;
   }
 
   .navbar .nav-links {
-    gap: 2rem;
+    gap: 1.5rem;
+  }
+
+  .machines-container {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Reducimos el ancho mínimo a 320px */
+    padding: 1rem;
   }
 }
 
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
-    padding: 1.5rem 2rem;
-    border-radius: 0;
+    padding: 1rem;
+    min-height: auto;
   }
 
   .navbar .logo {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   .navbar .search-bar {
     width: 100%;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
   }
 
   .navbar .nav-links {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1.5rem;
-  }
-
-  .navbar .nav-links li {
-    font-size: 1.1rem;
-    padding: 0.6rem 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .navbar {
-    padding: 1rem 1.5rem;
-  }
-
-  .navbar .nav-links {
-    flex-direction: column;
-    text-align: center;
     gap: 1rem;
   }
 
   .navbar .nav-links li {
     font-size: 1rem;
     padding: 0.5rem;
+  }
+
+  .machines-container {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.5rem;
+  }
+
+  .navbar .nav-links {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .navbar .nav-links li {
+    font-size: 0.9rem;
+    padding: 0.3rem;
+  }
+
+  .machines-container {
+    grid-template-columns: 1fr;
+    padding: 0.5rem;
+  }
+
+  .machine-card {
+    min-height: 400px; /* Reducimos la altura en pantallas pequeñas */
   }
 }
 
