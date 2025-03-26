@@ -15,9 +15,11 @@ const ProviderLogin = () => {
     setLoading(true);
     setError("");
     try {
-      await loginProvider({ email, password });
-      alert("Inicio de sesión exitoso");
-      navigate("/provider-dashboard"); // Redirigir al proveedor a su panel
+      const providerData = await loginProvider({ email, password });
+      console.log('Provider logged in:', providerData);
+      // Asegurarse de que los datos se guarden antes de navegar
+      localStorage.setItem('isProviderLoggedIn', 'true');
+      navigate("/provider-dashboard", { replace: true });
     } catch (error) {
       setError(error.message);
     } finally {

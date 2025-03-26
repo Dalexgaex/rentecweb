@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import {
   getProviderMachines,
-  deleteMachine,
-  updateMachine,
 } from "../services/machineService";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal, Box, Typography, TextField } from "@mui/material";
 import "../css/ProviderDashboard.css";
 
 const ProviderDashboard = () => {
+  const navigate = useNavigate(); // Añadida la declaración del hook
   const [machines, setMachines] = useState([]);
   const [filteredMachines, setFilteredMachines] = useState([]); // Lista filtrada
   const [searchTerm, setSearchTerm] = useState(""); // Término de búsqueda
@@ -24,24 +23,24 @@ const ProviderDashboard = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
 
-  const providerId = "3772a608-06cc-4ff4-8c69-8fb28452269e"; // Verifica que este ID sea correcto
-  const navigate = useNavigate();
-
+  // Eliminar esta línea ya que no necesitamos el ID hardcodeado
+  // const providerId = "3772a608-06cc-4ff4-8c69-8fb28452269e";
   useEffect(() => {
     const fetchMachines = async () => {
       try {
-        console.log("Obteniendo máquinas para el proveedor:", providerId);
-        const data = await getProviderMachines(providerId);
-        console.log("Datos recibidos:", data);
+        const data = await getProviderMachines();
         setMachines(data.length > 0 ? data : []);
-        setFilteredMachines(data.length > 0 ? data : []); // Inicializa la lista filtrada
+        setFilteredMachines(data.length > 0 ? data : []);
       } catch (error) {
         console.error("Error al obtener máquinas:", error.message);
         setError("Error al obtener las máquinas: " + error.message);
+        if (error.message.includes('No se encontró ID del proveedor')) {
+          navigate('/provider-login');
+        }
       }
     };
     fetchMachines();
-  }, []);
+  }, [navigate]);
 
   // Filtrar máquinas cuando cambia el término de búsqueda
   useEffect(() => {
