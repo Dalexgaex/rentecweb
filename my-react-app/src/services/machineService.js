@@ -1,6 +1,6 @@
 // src/services/machineService.js
 
-const API_URL = "https://rentek.onrender.com/machinery/by-provider";
+const API_URL = "http://192.168.137.180:3000/machinery";
 
 // Obtener las máquinas del proveedor
 export const getProviderMachines = async (providerId) => {
