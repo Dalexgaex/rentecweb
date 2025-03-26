@@ -140,7 +140,7 @@ body {
   background: rgba(255, 255, 255, 0.25);
 }
 
-/* Contenedor de máquinas (sin cambios, solo para contexto) */
+/* Contenedor de máquinas */
 .machines-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -149,7 +149,7 @@ body {
   padding: 1rem;
 }
 
-/* Tarjetas de máquinas (sin cambios, solo contexto) */
+/* Tarjetas de máquinas */
 .machine-card {
   background: var(--white);
   border-radius: 20px;
@@ -157,7 +157,11 @@ body {
   box-shadow: 0 8px 25px var(--shadow);
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* Cambiado de hidden a visible para que el contenido no se corte */
+  display: flex; /* Usamos flex para organizar el contenido */
+  flex-direction: column; /* Apilamos los elementos verticalmente */
+  justify-content: space-between; /* Distribuimos el espacio */
+  min-height: 400px; /* Altura mínima para asegurar que quepa todo */
 }
 
 .machine-card::before {
@@ -198,6 +202,7 @@ body {
   margin: 1rem 0 0.5rem;
   font-weight: 600;
   letter-spacing: -0.02em;
+  word-wrap: break-word; /* Para evitar desbordamiento horizontal */
 }
 
 .machine-card p {
@@ -205,6 +210,11 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   margin-bottom: 0.75rem;
+  word-wrap: break-word; /* Evita que el texto se salga */
+}
+
+.machine-card p strong {
+  color: var(--dark-gray); /* Resalta los títulos de los datos */
 }
 
 .machine-card button {
@@ -221,6 +231,8 @@ body {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  align-self: flex-end; /* Asegura que el botón esté al final de la card */
+  margin-top: auto; /* Empuja el botón al fondo del contenedor flex */
 }
 
 .machine-card button::after {
