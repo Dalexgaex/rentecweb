@@ -1,72 +1,65 @@
 import React, { useState, useEffect } from "react";
-import { createMachine } from "../services/machineServiceBulk"; // Importamos desde el nuevo archivo
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { updateMachine } from "../services/machineServiceBulk";
 import { Button, TextField, Typography, Box } from "@mui/material";
 import "../css/ProviderDashboard.css";
 
-const AddMachine = () => {
-  const [newMachine, setNewMachine] = useState({
+const UpdateMachine = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [machine, setMachine] = useState({
     name: "",
     brand: "",
     location: "",
     description: "",
     rental_price: "",
-    image_code: "", // Mantenemos image_code como string
+    image_code: "",
     state: true,
   });
-  const [selectedImage, setSelectedImage] = useState(null);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    const providerData = localStorage.getItem('providerData');
-    if (!providerData) {
-      setError("No se encontró un proveedor autenticado.");
-      navigate('/provider-login');
-    }
-  }, [navigate]);
+    const fetchMachine = async () => {
+      try {
+        const response = await fetch(`https://rentek.onrender.com/machinery/${id}`);
+        if (!response.ok) throw new Error('No se pudo obtener la máquina');
+        const data = await response.json();
+        setMachine(data);
+      } catch (error) {
+        setError("Error al cargar la máquina: " + error.message);
+      }
+    };
 
-  const handleImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setSelectedImage(e.target.files[0]);
-    }
+    fetchMachine();
+  }, [id]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setMachine(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (!newMachine.name || !newMachine.brand || !newMachine.location || !newMachine.rental_price) {
-        throw new Error("Todos los campos obligatorios deben estar llenos.");
-      }
-
-      const machineData = {
-        ...newMachine,
-        rental_price: Number(newMachine.rental_price),
-      };
-
-      const response = await createMachine(machineData);
-      console.log("Máquina creada:", response);
-      alert("¡Máquina creada con éxito!");
+      await updateMachine(id, {
+        ...machine,
+        rental_price: Number(machine.rental_price)
+      });
+      alert("Máquina actualizada con éxito");
       navigate("/provider-dashboard");
     } catch (error) {
-      setError("Error al crear la máquina: " + error.message);
-      console.error("Error en handleSubmit:", error);
+      setError("Error al actualizar: " + error.message);
     }
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewMachine((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
   };
 
   return (
     <div className="container">
       <Box className="provider-dashboard">
         <Typography variant="h4" component="h1" gutterBottom>
-          Agregar Nueva Máquina
+          Actualizar Máquina
         </Typography>
         {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
         <form onSubmit={handleSubmit} style={{ maxWidth: "600px", margin: "0 auto" }}>
@@ -74,17 +67,18 @@ const AddMachine = () => {
             fullWidth
             label="Nombre"
             name="name"
-            value={newMachine.name}
+            value={machine.name}
             onChange={handleChange}
             required
             margin="normal"
             variant="outlined"
           />
+          {/* Resto de los campos igual que en AddMachinePage */}
           <TextField
             fullWidth
             label="Marca"
             name="brand"
-            value={newMachine.brand}
+            value={machine.brand}
             onChange={handleChange}
             required
             margin="normal"
@@ -94,7 +88,7 @@ const AddMachine = () => {
             fullWidth
             label="Ubicación"
             name="location"
-            value={newMachine.location}
+            value={machine.location}
             onChange={handleChange}
             required
             margin="normal"
@@ -104,7 +98,7 @@ const AddMachine = () => {
             fullWidth
             label="Descripción"
             name="description"
-            value={newMachine.description}
+            value={machine.description}
             onChange={handleChange}
             multiline
             rows={3}
@@ -116,7 +110,7 @@ const AddMachine = () => {
             label="Precio de Renta"
             type="number"
             name="rental_price"
-            value={newMachine.rental_price}
+            value={machine.rental_price}
             onChange={handleChange}
             required
             margin="normal"
@@ -126,14 +120,14 @@ const AddMachine = () => {
             fullWidth
             label="Enlace de Imagen"
             name="image_code"
-            value={newMachine.image_code}
+            value={machine.image_code}
             onChange={handleChange}
             margin="normal"
             variant="outlined"
           />
           <Box className="button-container" sx={{ mt: 3 }}>
-            <Button type="submit" variant="contained" className="add-machine-btn">
-              Crear Máquina
+            <Button type="submit" variant="contained" color="primary">
+              Actualizar Máquina
             </Button>
             <Button
               variant="outlined"
@@ -149,4 +143,4 @@ const AddMachine = () => {
   );
 };
 
-export default AddMachine;
+export default UpdateMachine;

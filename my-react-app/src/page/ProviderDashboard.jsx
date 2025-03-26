@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
   getProviderMachines,
+  updateMachine,
+  deleteMachine
 } from "../services/machineService";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal, Box, Typography, TextField } from "@mui/material";
@@ -57,26 +59,22 @@ const ProviderDashboard = () => {
     setSearchTerm(e.target.value);
   };
 
-  const handleDelete = async (id) => {
-    try {
-      await deleteMachine(id);
-      setMachines(machines.filter((machine) => machine.id !== id));
-      setFilteredMachines(filteredMachines.filter((machine) => machine.id !== id));
-    } catch (error) {
-      alert("Error al eliminar la máquina: " + error.message);
-    }
+  const handleUpdate = (machine) => {
+    // En lugar de abrir el modal, navegamos a la página de actualización
+    navigate(`/update-machine/${machine.id}`);
   };
 
-  const handleUpdate = (machine) => {
-    setEditingMachine(machine);
-    setUpdatedMachine({
-      name: machine.name,
-      brand: machine.brand,
-      location: machine.location,
-      rental_price: machine.rental_price,
-      description: machine.description,
-    });
-    setOpenModal(true);
+  const handleDelete = async (id) => {
+    if (window.confirm('¿Estás seguro de que deseas eliminar esta máquina?')) {
+      try {
+        await deleteMachine(id);
+        setMachines(machines.filter((machine) => machine.id !== id));
+        setFilteredMachines(filteredMachines.filter((machine) => machine.id !== id));
+        alert("Máquina eliminada con éxito");
+      } catch (error) {
+        alert("Error al eliminar la máquina: " + error.message);
+      }
+    }
   };
 
   const handleChange = (e) => {
