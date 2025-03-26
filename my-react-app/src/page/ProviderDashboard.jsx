@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
   getProviderMachines,
-  updateMachine
+  updateMachine,
+  deleteMachine
 } from "../services/machineService";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal, Box, Typography, TextField } from "@mui/material";
