@@ -5,11 +5,13 @@ import {
   updateMachine,
 } from "../services/machineService";
 import { useNavigate } from "react-router-dom";
-import { Button, Modal, Box, Typography, TextField, Grid } from "@mui/material";
+import { Button, Modal, Box, Typography, TextField } from "@mui/material";
 import "../css/ProviderDashboard.css";
 
 const ProviderDashboard = () => {
   const [machines, setMachines] = useState([]);
+  const [filteredMachines, setFilteredMachines] = useState([]); // Lista filtrada
+  const [searchTerm, setSearchTerm] = useState(""); // Término de búsqueda
   const [error, setError] = useState(null);
   const [editingMachine, setEditingMachine] = useState(null);
   const [updatedMachine, setUpdatedMachine] = useState({
@@ -22,27 +24,47 @@ const ProviderDashboard = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
 
-  const providerId = "3772a608-06cc-4ff4-8c69-8fb28452269e";
+  const providerId = "3772a608-06cc-4ff4-8c69-8fb28452269e"; // Verifica que este ID sea correcto
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMachines = async () => {
       try {
+        console.log("Obteniendo máquinas para el proveedor:", providerId);
         const data = await getProviderMachines(providerId);
+        console.log("Datos recibidos:", data);
         setMachines(data.length > 0 ? data : []);
+        setFilteredMachines(data.length > 0 ? data : []); // Inicializa la lista filtrada
       } catch (error) {
-        setError("Error al obtener las máquinas");
+        console.error("Error al obtener máquinas:", error.message);
+        setError("Error al obtener las máquinas: " + error.message);
       }
     };
     fetchMachines();
   }, []);
 
+  // Filtrar máquinas cuando cambia el término de búsqueda
+  useEffect(() => {
+    const filtered = machines.filter((machine) =>
+      machine.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      machine.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      machine.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      machine.description.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredMachines(filtered);
+  }, [searchTerm, machines]);
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   const handleDelete = async (id) => {
     try {
       await deleteMachine(id);
       setMachines(machines.filter((machine) => machine.id !== id));
+      setFilteredMachines(filteredMachines.filter((machine) => machine.id !== id));
     } catch (error) {
-      alert("Error al eliminar la máquina");
+      alert("Error al eliminar la máquina: " + error.message);
     }
   };
 
@@ -72,152 +94,157 @@ const ProviderDashboard = () => {
       await updateMachine(editingMachine.id, updatedMachine);
       setMachines(
         machines.map((machine) =>
-          machine.id === editingMachine.id
-            ? { ...machine, ...updatedMachine }
-            : machine
+          machine.id === editingMachine.id ? { ...machine, ...updatedMachine } : machine
+        )
+      );
+      setFilteredMachines(
+        filteredMachines.map((machine) =>
+          machine.id === editingMachine.id ? { ...machine, ...updatedMachine } : machine
         )
       );
       setOpenModal(false);
       setOpenSuccess(true);
       setTimeout(() => setOpenSuccess(false), 2000);
     } catch (error) {
-      alert("Error al actualizar la máquina");
+      alert("Error al actualizar la máquina: " + error.message);
     }
   };
 
   return (
-    <div className="provider-dashboard">
-      <h1>Dashboard del Proveedor</h1>
-      {error && <p className="error-text">{error}</p>}
+    <div className="container">
+      <div className="provider-dashboard">
+        <h1>Dashboard del Proveedor</h1>
+        {error && <p className="error-text">{error}</p>}
 
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => navigate("/add-machine")}
-      >
-        Agregar Nueva Máquina
-      </Button>
+        {/* Contenedor del botón y buscador */}
+        <div className="button-container">
+          <Button
+            className="add-machine-btn"
+            variant="contained"
+            onClick={() => navigate("/add-machine")}
+          >
+            Agregar Nueva Máquina
+          </Button>
+        </div>
 
-      <div>
-        <h2>Mis Máquinas</h2>
-        {machines.length === 0 ? (
-          <p>No hay máquinas disponibles.</p>
-        ) : (
-          <Grid container spacing={3} direction="column">
-            {machines.map((machine) => (
-              <Grid item xs={12} key={machine.id}>
-                <Box className="machine-card">
-                  {/* Imagen primero */}
-                  <img
-                    src={machine.image_code}
-                    alt={machine.name}
-                    className="machine-image"
-                  />
+        {/* Buscador */}
+        <div className="search-container">
+          <TextField
+            fullWidth
+            label="Buscar máquinas"
+            variant="outlined"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            placeholder="Escribe nombre, marca, ubicación..."
+            className="search-input"
+          />
+        </div>
 
-                  {/* Información en el centro */}
-                  <div className="machine-info">
-                    <h3>{machine.name}</h3>
-                    <p>
-                      <strong>Marca:</strong> {machine.brand}
-                    </p>
-                    <p>
-                      <strong>Ubicación:</strong> {machine.location}
-                    </p>
-                    <p>
-                      <strong>Precio de renta:</strong> ${machine.rental_price}
-                    </p>
-                    <p>{machine.description}</p>
-                  </div>
+        <div className="machines-list">
+          {filteredMachines.length === 0 ? (
+            <p>No hay máquinas que coincidan con la búsqueda.</p>
+          ) : (
+            filteredMachines.map((machine) => (
+              <div className="machine-card" key={machine.id}>
+                <img
+                  src={machine.image_code || "https://via.placeholder.com/150"}
+                  alt={machine.name}
+                  className="machine-image"
+                  onError={(e) => (e.target.src = "https://via.placeholder.com/150")}
+                />
+                <div className="machine-info">
+                  <h3>{machine.name}</h3>
+                  <p><strong>Marca:</strong> {machine.brand}</p>
+                  <p><strong>Ubicación:</strong> {machine.location}</p>
+                  <p><strong>Precio de renta:</strong> ${machine.rental_price}</p>
+                  <p>{machine.description}</p>
+                </div>
+                <div className="button-group">
+                  <Button
+                    variant="contained"
+                    onClick={() => handleUpdate(machine)}
+                  >
+                    Actualizar
+                  </Button>
+                  <Button
+                    variant="contained"
+                    onClick={() => handleDelete(machine.id)}
+                  >
+                    Eliminar
+                  </Button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
 
-                  {/* Botones al final */}
-                  <div className="button-group">
-                    <Button
-                      variant="outlined"
-                      onClick={() => handleUpdate(machine)}
-                    >
-                      Actualizar
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="error"
-                      onClick={() => handleDelete(machine.id)}
-                    >
-                      Eliminar
-                    </Button>
-                  </div>
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
-        )}
+        {/* Modal para Actualización */}
+        <Modal open={openModal} onClose={() => setOpenModal(false)}>
+          <Box className="modal-box">
+            <Typography variant="h6">Actualizar Máquina</Typography>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                fullWidth
+                label="Nombre"
+                name="name"
+                value={updatedMachine.name}
+                onChange={handleChange}
+                required
+              />
+              <TextField
+                fullWidth
+                label="Marca"
+                name="brand"
+                value={updatedMachine.brand}
+                onChange={handleChange}
+                required
+              />
+              <TextField
+                fullWidth
+                label="Ubicación"
+                name="location"
+                value={updatedMachine.location}
+                onChange={handleChange}
+                required
+              />
+              <TextField
+                fullWidth
+                label="Precio de Renta"
+                type="number"
+                name="rental_price"
+                value={updatedMachine.rental_price}
+                onChange={handleChange}
+                required
+              />
+              <TextField
+                fullWidth
+                multiline
+                label="Descripción"
+                name="description"
+                value={updatedMachine.description}
+                onChange={handleChange}
+                required
+              />
+              <div className="modal-buttons">
+                <Button type="submit" variant="contained" color="success">
+                  Guardar
+                </Button>
+                <Button variant="outlined" onClick={() => setOpenModal(false)}>
+                  Cancelar
+                </Button>
+              </div>
+            </form>
+          </Box>
+        </Modal>
+
+        {/* Modal de Confirmación de Éxito */}
+        <Modal open={openSuccess} onClose={() => setOpenSuccess(false)}>
+          <Box className="modal-box success">
+            <Typography variant="h6">✅ ¡Actualización Exitosa!</Typography>
+            <Typography>La máquina ha sido actualizada correctamente.</Typography>
+          </Box>
+        </Modal>
       </div>
-
-      {/* Modal para Actualización de Máquina */}
-      <Modal open={openModal} onClose={() => setOpenModal(false)}>
-        <Box className="modal-box">
-          <Typography variant="h6">Actualizar Máquina</Typography>
-          <form onSubmit={handleSubmit}>
-            <TextField
-              fullWidth
-              label="Nombre"
-              name="name"
-              value={updatedMachine.name}
-              onChange={handleChange}
-              required
-            />
-            <TextField
-              fullWidth
-              label="Marca"
-              name="brand"
-              value={updatedMachine.brand}
-              onChange={handleChange}
-              required
-            />
-            <TextField
-              fullWidth
-              label="Ubicación"
-              name="location"
-              value={updatedMachine.location}
-              onChange={handleChange}
-              required
-            />
-            <TextField
-              fullWidth
-              label="Precio de Renta"
-              type="number"
-              name="rental_price"
-              value={updatedMachine.rental_price}
-              onChange={handleChange}
-              required
-            />
-            <TextField
-              fullWidth
-              multiline
-              label="Descripción"
-              name="description"
-              value={updatedMachine.description}
-              onChange={handleChange}
-              required
-            />
-            <div className="modal-buttons">
-              <Button type="submit" variant="contained" color="success">
-                Guardar
-              </Button>
-              <Button variant="outlined" onClick={() => setOpenModal(false)}>
-                Cancelar
-              </Button>
-            </div>
-          </form>
-        </Box>
-      </Modal>
-
-      {/* Modal de Confirmación de Éxito */}
-      <Modal open={openSuccess} onClose={() => setOpenSuccess(false)}>
-        <Box className="modal-box">
-          <Typography variant="h6">✅ ¡Actualización Exitosa!</Typography>
-          <Typography>La máquina ha sido actualizada correctamente.</Typography>
-        </Box>
-      </Modal>
     </div>
   );
 };

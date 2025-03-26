@@ -1,12 +1,14 @@
-// src/services/machineService.js
-
-const API_URL = "http://192.168.137.180:3000/machinery";
+const API_URL = "https://rentek.onrender.com/machinery";
 
 // Obtener las máquinas del proveedor
-export const getProviderMachines = async (providerId) => {
+export const getProviderMachines = async () => {
   try {
-    const response = await fetch(`${API_URL}/${providerId}`);
+    const providerId = localStorage.getItem("providerId"); // Obtiene el ID del proveedor en sesión
+    if (!providerId) throw new Error("No se encontró el ID del proveedor en sesión");
+
+    const response = await fetch(`${API_URL}?providerId=${providerId}`);
     if (!response.ok) throw new Error("No se pudieron obtener las máquinas");
+
     return await response.json();
   } catch (error) {
     throw new Error(error.message || "Error al obtener las máquinas");
@@ -16,7 +18,7 @@ export const getProviderMachines = async (providerId) => {
 // Eliminar una máquina
 export const deleteMachine = async (id) => {
   try {
-    const response = await fetch(`https://rentek.onrender.com/machinery/${id}`, {
+    const response = await fetch(`${API_URL}/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -35,11 +37,10 @@ export const deleteMachine = async (id) => {
   }
 };
 
-
 // Actualizar una máquina
 export const updateMachine = async (id, machineData) => {
   try {
-    const response = await fetch(`https://rentek.onrender.com/machinery/${id}`, {
+    const response = await fetch(`${API_URL}/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(machineData),
@@ -49,10 +50,11 @@ export const updateMachine = async (id, machineData) => {
     throw new Error(error.message || "Error al actualizar la máquina");
   }
 };
+
 // Crear una nueva máquina
 export const createMachine = async (machineData) => {
   try {
-    const response = await fetch("https://rentek.onrender.com/machinery", {
+    const response = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(machineData),
@@ -62,9 +64,7 @@ export const createMachine = async (machineData) => {
       throw new Error("Error al crear la máquina");
     }
 
-    // Retornar la respuesta si la máquina fue creada exitosamente
-    const data = await response.json();
-    return data; // Esto te permitirá manejar la respuesta desde el componente
+    return await response.json();
   } catch (error) {
     throw new Error(error.message || "Error al crear la máquina");
   }

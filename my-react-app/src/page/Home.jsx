@@ -11,7 +11,7 @@ const Home = () => {
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    fetch("http://192.168.137.180:3000/machinery")
+    fetch("https://rentek.onrender.com/machinery")
       .then((res) => res.json())
       .then((data) => {
         setMachines(data);

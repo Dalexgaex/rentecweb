@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://192.168.137.180:3000/machinery/with-provider"; // Asegúrate de tener la URL base correcta
+const API_URL = "https://rentek.onrender.com/api-docs/#/Machinery%20method%20get/get_machinery_by_provider__provider_id_"; // Asegúrate de tener la URL base correcta
 
 // Función para autenticar al usuario normal (para login)
 export const loginUser = async (userData) => {
