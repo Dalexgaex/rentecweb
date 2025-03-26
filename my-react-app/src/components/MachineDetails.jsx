@@ -26,9 +26,8 @@ const MachineDetails = () => {
         }
 
         const machines = await response.json();
-        console.log("Máquinas recibidas:", machines);
+        console.log("Máquinas recibidas en MachineDetails:", machines);
 
-        // Buscar la máquina con el ID correspondiente
         const foundMachine = machines.find((m) => m.id === id);
         if (!foundMachine) {
           throw new Error(`Máquina con ID ${id} no encontrada`);
@@ -48,12 +47,12 @@ const MachineDetails = () => {
 
   const handleRent = () => {
     alert("Funcionalidad de rentar en desarrollo");
-    navigate("/rent-form"); // Ejemplo de ruta
+    navigate("/rent-form");
   };
 
   const handleQuote = () => {
     alert("Funcionalidad de cotizar en desarrollo");
-    navigate("/quote-form"); // Ejemplo de ruta
+    navigate("/quote-form");
   };
 
   if (loading) {
