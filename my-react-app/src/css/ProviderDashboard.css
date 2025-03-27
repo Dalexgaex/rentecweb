@@ -1,204 +1,423 @@
-/* Contenedor principal */
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 30px;
-  background-color: #f9f9f9;
-  min-height: 100vh;
-  font-family: 'Arial', sans-serif;
-}
-
-/* Título principal */
-.provider-dashboard h1 {
-  color: #ff8c00;
-  font-size: 2.5rem;
-  text-align: center;
-  margin-bottom: 40px;
-  font-weight: 700;
-}
-
-/* Contenedor del botón "Agregar Máquina" */
-.button-container {
+/* === Wrapper General === */
+.dashboard-wrapper {
   display: flex;
-  justify-content: center;
-  margin-bottom: 40px;
+  min-height: 100vh;
 }
 
-/* Botón "Agregar Máquina" */
-.add-machine-btn {
-  background-color: #ff8c00;
-  color: white;
-  padding: 14px 24px;
-  font-size: 1.1rem;
+/* === Barra Lateral === */
+.sidebar {
+  width: 250px;
+  background: linear-gradient(180deg, #1a1a1a 0%, #333333 100%);
+  color: #ffffff;
+  padding: 2rem 1.5rem;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.user-icon {
+  font-size: 2.5rem;
+  color: #ff8c00;
+}
+
+.sidebar-header .MuiTypography-h6 {
+  font-size: 1.5rem;
   font-weight: 600;
-  border: none;
-  border-radius: 8px;
+  color: #ffffff;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu li {
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
-.add-machine-btn:hover {
-  background-color: #e07b00;
-  transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+.sidebar-menu li:hover {
+  background: #ff8c00;
+  color: #ffffff;
+  transform: translateX(5px);
 }
 
-/* Contenedor del buscador */
-.search-container {
-  max-width: 600px; /* Ancho máximo del buscador */
-  margin: 0 auto 40px; /* Centrado con espacio debajo */
+/* === Contenedor Principal === */
+.container {
+  flex: 1;
+  max-width: calc(100% - 250px);
+  margin-left: 250px;
+  padding: 2.5rem;
+  background: linear-gradient(145deg, #f9f9f9 0%, #ffffff 100%);
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
 }
 
-/* Estilo del input de búsqueda */
-.search-input {
-  width: 100%;
+/* === Perfil de la Empresa === */
+.company-profile {
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
 }
 
-/* Lista de máquinas */
-.machines-list {
+.profile-title {
+  color: #ff8c00;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.profile-content {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  padding: 0 10px;
-}
-
-/* Tarjeta de máquina */
-.machine-card {
-  display: grid;
-  grid-template-columns: 150px 1fr 220px;
+  gap: 1.5rem;
   align-items: center;
-  background: #ffffff;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s ease;
-  gap: 25px;
 }
 
-.machine-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* Imagen de la máquina */
-.machine-image {
-  width: 150px;
-  height: 150px;
+.profile-logo {
+  width: 300px;
+  height: 200px;
   border-radius: 12px;
   object-fit: cover;
   border: 1px solid #eee;
 }
 
-/* Información de la máquina */
+.profile-info {
+  text-align: left;
+  max-width: 700px;
+}
+
+.profile-info .MuiTypography-h6 {
+  color: #333;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.profile-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0;
+}
+
+.profile-info ul li {
+  margin: 0.5rem 0;
+}
+
+/* === Título Principal === */
+.provider-dashboard h1 {
+  color: #ff8c00;
+  font-size: 2.8rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* === Contenedor de Botón "Agregar Máquina" === */
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.add-machine-btn {
+  background: linear-gradient(135deg, #ff8c00, #ff6200);
+  color: #ffffff;
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.add-machine-btn:hover {
+  background: linear-gradient(135deg, #ff6200, #e07b00);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(255, 140, 0, 0.4);
+}
+
+/* === Contenedor del Buscador === */
+.search-container {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  padding: 0 1rem;
+}
+
+.search-input .MuiOutlinedInput-root {
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.search-input .MuiOutlinedInput-root:hover,
+.search-input .MuiOutlinedInput-root.Mui-focused {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.search-input .MuiInputLabel-root {
+  color: #666;
+  font-weight: 500;
+}
+
+/* === Lista de Máquinas === */
+.machines-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+/* === Tarjeta de Máquina === */
+.machine-card {
+  display: grid;
+  grid-template-columns: 160px 1fr 240px;
+  align-items: center;
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  gap: 1.5rem;
+}
+
+.machine-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.machine-image {
+  width: 100%;
+  height: 160px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid #eee;
+  transition: transform 0.3s ease;
+}
+
+.machine-card:hover .machine-image {
+  transform: scale(1.05);
+}
+
 .machine-info {
   text-align: left;
 }
 
 .machine-info h3 {
-  color: #333;
+  color: #222;
   font-size: 1.6rem;
-  margin-bottom: 10px;
+  margin-bottom: 0.75rem;
   font-weight: 600;
 }
 
 .machine-info p {
   color: #555;
   font-size: 1.1rem;
-  margin: 6px 0;
-  line-height: 1.5;
+  margin: 0.5rem 0;
+  line-height: 1.6;
 }
 
-/* Botones dentro de la tarjeta */
+.machine-info p strong {
+  color: #333;
+  font-weight: 600;
+}
+
+/* === Botones en la Tarjeta === */
 .button-group {
   display: flex;
   flex-direction: row;
-  gap: 15px;
+  gap: 1rem;
   justify-content: flex-end;
 }
 
 .button-group button {
-  background: #ff8c00;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  cursor: pointer;
-  border-radius: 8px;
+  padding: 0.9rem 1.5rem;
   font-size: 1rem;
   font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.button-group button:hover {
-  background: #e07b00;
+.button-group button:first-child {
+  background: linear-gradient(135deg, #ff8c00, #ff6200);
+  color: #ffffff;
+}
+
+.button-group button:first-child:hover {
+  background: linear-gradient(135deg, #ff6200, #e07b00);
   transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 5px 12px rgba(255, 140, 0, 0.4);
 }
 
-/* Botón "Eliminar" */
 .button-group button:last-child {
-  background: #e63946;
+  background: linear-gradient(135deg, #e63946, #d32f2f);
+  color: #ffffff;
 }
 
 .button-group button:last-child:hover {
-  background: #d32f2f;
+  background: linear-gradient(135deg, #d32f2f, #b71c1c);
   transform: translateY(-3px);
+  box-shadow: 0 5px 12px rgba(230, 57, 70, 0.4);
 }
 
-/* Modal para actualización */
+/* === Modal para Actualización === */
 .modal-box {
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-  width: 500px;
-  margin: 50px auto;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 550px;
+  margin: 5rem auto;
   text-align: center;
+  position: relative;
+  border-top: 4px solid #ff8c00;
 }
 
 .modal-box .MuiTextField-root {
-  margin: 15px 0;
+  margin: 1rem 0;
   width: 100%;
+}
+
+.modal-box .MuiOutlinedInput-root {
+  border-radius: 8px;
 }
 
 .modal-buttons {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 
-/* Modal de éxito */
+.modal-buttons button {
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+/* === Modal de Éxito === */
 .modal-box.success {
-  padding: 20px;
-  width: 400px;
+  padding: 1.5rem;
+  max-width: 400px;
+  background: #ffffff;
+  border-top: 4px solid #4caf50;
 }
 
-/* Responsividad */
-@media (max-width: 768px) {
+.modal-box.success .MuiTypography-h6 {
+  color: #4caf50;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.modal-box.success .MuiTypography-root {
+  color: #333;
+}
+
+/* === Texto de Error === */
+.error-text {
+  color: #e63946;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* === Responsividad === */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px;
+  }
+
   .container {
-    padding: 20px;
+    max-width: calc(100% - 200px);
+    margin-left: 200px;
+  }
+
+  .machine-card {
+    grid-template-columns: 140px 1fr 200px;
+  }
+
+  .machine-image {
+    height: 140px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100%;
+    padding: 1.5rem;
+    box-shadow: none;
+    border-bottom: 2px solid #ff8c00;
+  }
+
+  .container {
+    max-width: 100%;
+    margin-left: 0;
+    padding: 1.5rem;
+  }
+
+  .company-profile {
+    padding: 1.5rem;
+  }
+
+  .profile-logo {
+    width: 200px;
+    height: 150px;
   }
 
   .provider-dashboard h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 
   .add-machine-btn {
-    padding: 12px 20px;
+    padding: 0.8rem 2rem;
     font-size: 1rem;
   }
 
   .search-container {
-    max-width: 100%; /* Ocupa todo el ancho en móviles */
-    padding: 0 10px;
+    max-width: 100%;
+    padding: 0 0.5rem;
   }
 
   .machine-card {
     grid-template-columns: 1fr;
-    padding: 20px;
-    gap: 20px;
+    text-align: center;
+    padding: 1.25rem;
+    gap: 1rem;
   }
 
   .machine-image {
@@ -207,68 +426,43 @@
     margin: 0 auto;
   }
 
-  .machine-info {
-    text-align: center;
-  }
-
   .button-group {
     justify-content: center;
-    gap: 10px;
-  }
-
-  .button-group button {
-    padding: 10px 18px;
-    font-size: 0.9rem;
+    flex-wrap: wrap;
   }
 
   .modal-box {
     width: 90%;
-    padding: 20px;
+    padding: 1.5rem;
+    margin: 3rem auto;
   }
 }
 
-/* Contenedor principal */
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 30px;
-  background-color: #f9f9f9;
-  min-height: 100vh;
-  font-family: 'Arial', sans-serif;
-}
+@media (max-width: 480px) {
+  .provider-dashboard h1 {
+    font-size: 1.8rem;
+  }
 
-/* Título */
-.provider-dashboard h1 {
-  color: #ff8c00;
-  font-size: 2.5rem;
-  text-align: center;
-  margin-bottom: 40px;
-  font-weight: 700;
-}
+  .add-machine-btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+  }
 
-/* Contenedor de botones */
-.button-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 40px;
-}
+  .machine-info h3 {
+    font-size: 1.4rem;
+  }
 
-/* Botón "Crear Máquina" */
-.add-machine-btn {
-  background-color: #ff8c00;
-  color: white;
-  padding: 14px 24px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
+  .machine-info p {
+    font-size: 1rem;
+  }
 
-.add-machine-btn:hover {
-  background-color: #e07b00;
-  transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  .button-group button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .profile-logo {
+    width: 150px;
+    height: 100px;
+  }
 }
