@@ -10,6 +10,7 @@ import Catalog from "./page/Catalog"; // Agregado
 import Favorites from "./page/Favorites"; // Agregado
 import Profile from "./page/Profile"; // Agregado
 import Settings from "./page/Settings"; // Agregado
+import RentekPromoPage from "./page/RentekPromoPage"; // Asegúrate de esta línea
 
 
 const AppRoutes = () => {
@@ -26,6 +27,7 @@ const AppRoutes = () => {
         <Route path="/mis-maquinas" element={<MyMachines />} />
          <Route path="/catalog" element={<Catalog />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/maquina/:id" element={<RentekPromoPage />} /> {/* Aquí se usa */}
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
       </Routes>
