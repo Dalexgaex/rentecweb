@@ -25,11 +25,10 @@ const NavBar = ({ hidden, search, setSearch, navigate }) => (
     </div>
     <ul className="nav-links">
       {[
-        { label: "Catálogo", path: "/catalogo" },
-        { label: "Favoritos", path: "/favoritos" },
-        { label: "Perfil", path: "/perfil" },
-        { label: "Configuraciones", path: "/configuraciones" },
-        { label: "Mis Máquinas", path: "/mis-maquinas" },
+        { label: "Catálogo", path: "/Catalog" },
+        { label: "Favoritos", path: "/Favorites" },
+        { label: "Perfil", path: "/Profile" },
+        { label: "Configuraciones", path: "/settings" },
       ].map(({ label, path }) => (
         <li key={path} onClick={() => navigate(path)}>
           {label}

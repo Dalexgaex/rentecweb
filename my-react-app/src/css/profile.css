@@ -1,168 +1,72 @@
-/* Contenedor principal */
+/* src/css/Profile.css */
 .profile-container {
-    padding: 3rem;
-    max-width: 800px;
-    margin: 0 auto;
-    background: linear-gradient(145deg, #ffffff 0%, #f5f7fa 100%);
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    margin-top: 120px;
-    font-family: "Poppins", sans-serif;
-    position: relative;
-    overflow: hidden;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff; /* Blanco de fondo */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
-  /* Barra decorativa */
-  .profile-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(to right, #ff6f00, #1a1a1a);
-  }
-  
-  /* Título */
-  .profile-container h1 {
-    font-size: 2.8rem;
-    color: #1a1a1a;
-    margin-bottom: 2rem;
-    text-align: center;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Detalles del perfil */
-  .profile-details {
-    padding: 2rem;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .profile-details p {
-    font-size: 1.3rem;
-    color: #333;
-    margin-bottom: 1rem;
-    line-height: 1.7;
-  }
-  
-  .profile-details p strong {
-    color: #1a1a1a;
-    font-weight: 600;
-    margin-right: 0.5rem;
-  }
-  
-  /* Sin sesión */
-  .no-session {
-    text-align: center;
-  }
-  
-  .no-session h2 {
-    font-size: 2rem;
-    color: #1a1a1a;
-    margin-bottom: 1.5rem;
-  }
-  
-  .no-session p {
-    font-size: 1.2rem;
-    color: #666;
-    margin-bottom: 2rem;
-  }
-  
-  /* Contenedor de botones */
-  .button-container {
+  .profile-header {
     display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
-    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
   }
   
-  /* Botón genérico */
-  .profile-container button {
-    padding: 1rem 2.5rem;
+  .profile-header img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+  }
+  
+  .profile-header h1 {
+    font-size: 2rem;
+    color: #ff8c00; /* Amarillo-naranja */
+  }
+  
+  .profile-info {
+    margin-bottom: 20px;
+  }
+  
+  .profile-info p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  .profile-info p strong {
+    color: #ff8c00; /* Amarillo-naranja para resaltar */
+  }
+  
+  .rentals-list {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  
+  .rentals-list li {
+    background-color: #f7f7f7;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 4px;
+  }
+  
+  .profile-button {
+    background-color: #ff8c00; /* Amarillo-naranja */
+    color: white;
+    padding: 10px 20px;
     border: none;
-    border-radius: 10px;
-    font-size: 1.2rem;
-    font-weight: 600;
+    border-radius: 4px;
     cursor: pointer;
-    transition: all 0.4s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-size: 1rem;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
   }
   
-  /* Botón de Iniciar Sesión (Amarillo) */
-  .profile-container .login-button {
-    background: linear-gradient(135deg, #ff6f00, #ff8c00);
-    color: white;
+  .profile-button:hover {
+    background-color: #e07800; /* Un tono más oscuro para el hover */
   }
   
-  .profile-container .login-button:hover {
-    background: linear-gradient(135deg, #ff8c00, #ffa500);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(255, 111, 0, 0.5);
-  }
-  
-  /* Botón de Editar Perfil (Blanco con borde negro) */
-  .profile-container .edit-button {
-    background: #ffffff;
-    color: #1a1a1a;
-    border: 2px solid #1a1a1a;
-  }
-  
-  .profile-container .edit-button:hover {
-    background: #f5f7fa;
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  }
-  
-  /* Botón de Cerrar Sesión (Negro) */
-  .profile-container .logout-button {
-    background: linear-gradient(135deg, #1a1a1a, #333333);
-    color: white;
-  }
-  
-  .profile-container .logout-button:hover {
-    background: linear-gradient(135deg, #333333, #4a4a4a);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(26, 26, 26, 0.5);
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .profile-container {
-      padding: 2rem;
-      margin-top: 100px;
-    }
-  
-    .profile-container h1 {
-      font-size: 2.2rem;
-    }
-  
-    .profile-details, .no-session {
-      padding: 1.5rem;
-    }
-  
-    .profile-details p, .no-session p {
-      font-size: 1.1rem;
-    }
-  
-    .no-session h2 {
-      font-size: 1.8rem;
-    }
-  
-    .profile-container button {
-      padding: 0.8rem 2rem;
-      font-size: 1rem;
-    }
-  
-    .button-container {
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-  }

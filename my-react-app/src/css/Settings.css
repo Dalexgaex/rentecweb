@@ -1,0 +1,73 @@
+/* settings.css */
+
+/* General container for the settings page */
+.settings-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Title and headers for each section */
+  .settings-container h1 {
+    font-size: 2rem;
+    color: #ff8c00; /* Rentek yellow-orange */
+    text-align: center;
+  }
+  
+  .settings-container h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  /* Each setting item (like buttons and text) */
+  .setting-item {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+  }
+  
+  .setting-item p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .setting-item button {
+    padding: 8px 16px;
+    font-size: 1rem;
+    background-color: #ff8c00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .setting-item button:hover {
+    background-color: #e67800;
+  }
+  
+  /* Responsive styles for smaller screens */
+  @media (max-width: 768px) {
+    .settings-container {
+      padding: 15px;
+    }
+  
+    .setting-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .setting-item button {
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+  

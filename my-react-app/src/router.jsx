@@ -6,6 +6,10 @@ import ProviderLogin from "./components/ProviderLogin";
 import ProviderDashboard from "./page/ProviderDashboard";
 import AddMachinePage from "./page/AddMachinePage";
 import MyMachines from "./components/MyMachines"; 
+import Catalog from "./page/Catalog"; // Agregado
+import Favorites from "./page/Favorites"; // Agregado
+import Profile from "./page/Profile"; // Agregado
+import Settings from "./page/Settings"; // Agregado
 
 
 const AppRoutes = () => {
@@ -20,6 +24,10 @@ const AppRoutes = () => {
         <Route path="/provider-dashboard" element={<ProviderDashboard />} />
         <Route path="/add-machine" element={<AddMachinePage />} />
         <Route path="/mis-maquinas" element={<MyMachines />} />
+         <Route path="/catalog" element={<Catalog />} />
+          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/settings" element={<Settings />} />
       </Routes>
     </Router>
   );
