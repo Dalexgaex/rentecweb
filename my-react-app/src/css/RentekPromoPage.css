@@ -1,0 +1,152 @@
+/* Contenedor principal */
+.promo-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ff8c00 0%, #ffffff 100%);
+    padding: 2rem;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  /* Contenido */
+  .promo-content {
+    background: #ffffff;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  /* Título */
+  .promo-title {
+    color: #ff8c00;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  /* Subtítulo */
+  .promo-subtitle {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Texto */
+  .promo-text {
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  
+  /* Botones de tiendas */
+  .promo-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .store-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .android-button {
+    background: linear-gradient(135deg, #3dd969, #28a745);
+    color: #ffffff;
+  }
+  
+  .android-button:hover {
+    background: linear-gradient(135deg, #28a745, #218838);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(40, 167, 69, 0.3);
+  }
+  
+  .ios-button {
+    background: linear-gradient(135deg, #000000, #333333);
+    color: #ffffff;
+  }
+  
+  .ios-button:hover {
+    background: linear-gradient(135deg, #333333, #1a1a1a);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  }
+  
+  .store-icon {
+    width: 30px;
+    height: auto;
+    margin-right: 0.75rem;
+  }
+  
+  /* Botón de volver */
+  .back-button {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    border-color: #ff8c00;
+    color: #ff8c00;
+    transition: all 0.3s ease;
+  }
+  
+  .back-button:hover {
+    background: #ff8c00;
+    color: #ffffff;
+    border-color: #ff8c00;
+  }
+  
+  /* Responsividad */
+  @media (max-width: 768px) {
+    .promo-content {
+      padding: 2rem;
+    }
+  
+    .promo-title {
+      font-size: 2rem;
+    }
+  
+    .promo-subtitle {
+      font-size: 1.5rem;
+    }
+  
+    .promo-text {
+      font-size: 1rem;
+    }
+  
+    .store-button {
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+    }
+  
+    .store-icon {
+      width: 25px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .promo-title {
+      font-size: 1.8rem;
+    }
+  
+    .promo-subtitle {
+      font-size: 1.2rem;
+    }
+  
+    .promo-text {
+      font-size: 0.9rem;
+    }
+  }
